@@ -1,0 +1,9 @@
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\bin\Debug\ClipExtender.exe
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\bin\Debug\ClipExtender.pdb
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\ClipExtender.Form1.resources
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\ClipExtender.Properties.Resources.resources
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\ClipExtender.exe
+C:\Users\Beelzebub\AppData\Local\Temporary Projects\ClipExtender\obj\x86\Debug\ClipExtender.pdb
