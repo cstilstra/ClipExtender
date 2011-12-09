@@ -7,3 +7,13 @@ C:\Users\Beelzebub\documents\visual studio 2010\Projects\ClipExtender1\ClipExten
 C:\Users\Beelzebub\documents\visual studio 2010\Projects\ClipExtender1\ClipExtender1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Beelzebub\documents\visual studio 2010\Projects\ClipExtender1\ClipExtender1\obj\x86\Debug\ClipExtender1.exe
 C:\Users\Beelzebub\documents\visual studio 2010\Projects\ClipExtender1\ClipExtender1\obj\x86\Debug\ClipExtender1.pdb
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender1.exe
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender1.pdb
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\bin\Debug\ClipExtender1.exe
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\bin\Debug\ClipExtender1.pdb
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender.Form1.resources
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender.Properties.Resources.resources
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender.About.resources
