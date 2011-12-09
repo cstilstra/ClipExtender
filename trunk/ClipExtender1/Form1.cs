@@ -1,4 +1,20 @@
-﻿using System;
+﻿//This file is part of ClipExtender.
+
+//ClipExtender is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//ClipExtender is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,27 +63,7 @@ namespace ClipExtender
             }
         }
 
-        //handles the click of the button that will add an item to the list
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            //determines if the entry is already an item in the list
-            bool alreadyCopied = findString(tbEntry.Text);
-
-            //if the entry is not in the list, add it and clear the textbox
-            if (alreadyCopied == false)
-            {
-                listBox1.Items.Add(tbEntry.Text);
-                tbEntry.Text = "";
-            }
-            //if the entry is in the list, show error message and clear the textbox
-            if (alreadyCopied == true)
-            {
-                MessageBox.Show("This item is already copied to ClipExtender.");
-                tbEntry.Text = "";
-            }
-            //run the function that will select the last item in the list
-            selectLast();
-        }
+       
 
         //this function will determine if a string already exists as an item in the listbox and return a boolean value
         private bool findString(string searchString)
@@ -227,6 +223,19 @@ namespace ClipExtender
         private void timer1_Tick(object sender, EventArgs e)
         {
             runOnce = false;
+        }
+
+        private void aboutClipExtenderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About AboutFRM = new About();
+            Form1 ParentForm = new Form1();
+            AboutFRM.StartPosition = ParentForm.StartPosition;
+            AboutFRM.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
