@@ -11,7 +11,7 @@
 //GNU General Public License for more details.
 
 //You should have received a copy of the GNU General Public License
-//along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+//along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
 
 
 using System;
@@ -31,9 +31,15 @@ namespace ClipExtender
 {
     public partial class Form1 : Form
     {
+
+
+
         //this boolean is used to control when the clipboard monitor messages are acted upon
         //without it any change in clipboard contents sends the program into an endless loop
         Boolean runOnce = false;
+
+        //the path that the application executable is installed to
+        String appPath = Application.StartupPath;
 
         //I don't know exactly how these next three entries work, but they add the program as a clipboard monitor
         //as well as remove it as a clipboard listener, but I have no idea what the third one is
@@ -55,7 +61,17 @@ namespace ClipExtender
         {
             InitializeComponent();
             selectLast();
-                                    
+
+            //create a temp directory to hold image files
+            if (Directory.Exists(appPath + "Temp"))
+            {
+
+            }
+            else
+            {
+                Directory.CreateDirectory(appPath + "Temp");
+            }
+
             //if for some reason we cannot add this window as a format listener, pop a message box
             if (!AddClipboardFormatListener(this.Handle))
             {
@@ -63,12 +79,13 @@ namespace ClipExtender
             }
         }
 
-       
+
 
         //this function will determine if a string already exists as an item in the listbox and return a boolean value
         private bool findString(string searchString)
         {
             int index = listBox1.FindStringExact(searchString);
+            //if index is NOT equal to listbox.nomatches = if there is a match
             if (index != ListBox.NoMatches)
                 return true;
             else
@@ -106,17 +123,27 @@ namespace ClipExtender
             //create the string that will potentially hold the clipboard text
             String returnHtmlText = null;
             Boolean clipContainsText = Clipboard.ContainsText();
+            Boolean clipContainsIMG = Clipboard.ContainsImage();
+            String imageFileName = null;
             //test if the clipboard containts text
             if (clipContainsText == true)
-            
+
                 //if it does, pull that text and assign to string returnHtmlText
                 returnHtmlText = Clipboard.GetText();
-            
-            //the contents of returnHtmlText are returned, whether null or containing text
-            else
-            
+
+            if (clipContainsIMG == true)
+
+                //if imageFileName variable is not used, this is broken. If it is used, no problem
+                //obviously this is a placeholder for an actual image's file name
+                //the functionality also needs to be built to save the image into the Temp folder for retrieval later
+                imageFileName = "MyImage";
+            returnHtmlText = "ImageFilename";
+
+            //the contents of returnHtmlText are returned, whether empty, containing text or containing an image filename
+            if (returnHtmlText == null)
+
                 returnHtmlText = "empty";
-            
+
             return returnHtmlText;
         }
 
@@ -183,27 +210,34 @@ namespace ClipExtender
 
             //set runOnce to true so that the clipboard change message will not be acted upon again...
             //which would result in an endless loop
-                runOnce = true;
+            runOnce = true;
 
             //select the last item in the list, which causes sending of the clipboard change message
-                selectLast();
+            selectLast();
             //start the timer
             //once the timer has ticked, runOnce will be set back to false...
             //enabling the clipboard change message to be acted upon again
-                timer1.Start();                
+            timer1.Start();
             //}
-            
+
         }
 
         //not sure how this works, but it is what handles the message that is sent when the clipboard updates
         protected override void DefWndProc(ref Message m)
         {
             if (m.Msg == WM_CLIPBOARDUPDATE)
-            {              
+            {
+                //this if statement effectively stops the clipExtender from putting itself into an infinite loop
+                //every time something is copied
                 if (runOnce == false)
                 {
+                    //this subroutine changes the clipboard contents, which resends the clipboard update message
+                    //which reruns this subroutine, etc, looping forever unless we use a toggle variable
                     getClipboardData();
                 }
+                //runOnce will only ever be true within the first 100ms of having copied something
+                //because we are not able to react to the clipboard update message within this time
+                //it stops the program from continually looping
                 else if (runOnce == true)
                 {
                 }
@@ -218,13 +252,18 @@ namespace ClipExtender
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             RemoveClipboardFormatListener(this.Handle);
+            Directory.Delete(appPath + "Temp");
         }
 
+        //this timer will be used to reset the runOnce variable to false
+        //because this timer ticks at an interval of 100ms
+        //it is not possible to copy something within 100ms of having copied before
         private void timer1_Tick(object sender, EventArgs e)
         {
             runOnce = false;
         }
 
+        //opens the "About" form
         private void aboutClipExtenderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About AboutFRM = new About();
@@ -233,9 +272,11 @@ namespace ClipExtender
             AboutFRM.Show();
         }
 
+        //exits the program
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
     }
 }
+  
