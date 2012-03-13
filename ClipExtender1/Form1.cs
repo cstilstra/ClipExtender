@@ -131,18 +131,18 @@ namespace ClipExtender
                 //if it does, pull that text and assign to string returnHtmlText
                 returnHtmlText = Clipboard.GetText();
 
-            if (clipContainsIMG == true)
+            //if (clipContainsIMG == true)
 
-                //if imageFileName variable is not used, this is broken. If it is used, no problem
-                //obviously this is a placeholder for an actual image's file name
-                //the functionality also needs to be built to save the image into the Temp folder for retrieval later
-                imageFileName = "MyImage";
-            returnHtmlText = "ImageFilename";
+            //    //if imageFileName variable is not used, this is broken. If it is used, no problem
+            //    //obviously this is a placeholder for an actual image's file name
+            //    //the functionality also needs to be built to save the image into the Temp folder for retrieval later
+            //    imageFileName = "MyImage";
+            //returnHtmlText = "ImageFilename";
 
-            //the contents of returnHtmlText are returned, whether empty, containing text or containing an image filename
-            if (returnHtmlText == null)
+            ////the contents of returnHtmlText are returned, whether empty, containing text or containing an image filename
+            //if (returnHtmlText == null)
 
-                returnHtmlText = "empty";
+            //    returnHtmlText = "empty";
 
             return returnHtmlText;
         }
@@ -172,9 +172,18 @@ namespace ClipExtender
         {
             //variable to hold the number of items in the list
             int numOfEntries = listBox1.Items.Count;
-            //if we have entries in the list, select the next entry one
+                        
+            //if we have entries in the list, select the next entry
             if (numOfEntries > 0)
+            {
+                //if the selected entry was the last in the list
+                if (numOfEntries == currSelect)
+                {   
+                    //take one from currSelect in order to avoid error
+                    currSelect --;
+                }
                 listBox1.SetSelected(currSelect, true);
+            }
         }
 
         //this will pull the contents of the clipboard and add to the listbox
@@ -183,11 +192,12 @@ namespace ClipExtender
             //pull the text contents of the clipboard
             //if no text content exists, this will return a null value
             String textFromClip = pullFromClip();
-            //declare a boolean and populate it the results of testing if textFromClip is found in the listbox
-            Boolean textAlreadyInList = findString(textFromClip);
+            ////declare a boolean and populate it the results of testing if textFromClip is found in the listbox
+            ////this is currently useless since the code resulting from this test is non functional
+            //Boolean textAlreadyInList = findString(textFromClip);
 
             //if the clipboard does not contain text...
-            if (textFromClip == "empty")
+            if (textFromClip == null)
                 //then show us a message box saying so...
                 MessageBox.Show("The Clipboard does not contain text at this time.");
 
@@ -197,7 +207,7 @@ namespace ClipExtender
             //"The Clipboard does not contain text at this time" and...
             //"This item is already copied to ClipExtender"...
             //and then puts the duplicate text in the listbox anyway
-            else if (textFromClip != "empty")
+            else if (textFromClip != null)
                 ////if the string is already in the listbox show us a message box
                 //    if (textAlreadyInList == true);
                 //{
