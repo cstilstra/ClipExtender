@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipExtender1", "ClipExtender1\ClipExtender1.csproj", "{63382513-F0D8-4359-B3A8-F8710A313B7B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{213A9B77-B67C-4E84-B98C-BAB6A1747AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,8 @@ Global
 		{63382513-F0D8-4359-B3A8-F8710A313B7B}.Debug|x86.Build.0 = Debug|x86
 		{63382513-F0D8-4359-B3A8-F8710A313B7B}.Release|x86.ActiveCfg = Release|x86
 		{63382513-F0D8-4359-B3A8-F8710A313B7B}.Release|x86.Build.0 = Release|x86
+		{213A9B77-B67C-4E84-B98C-BAB6A1747AC6}.Debug|x86.ActiveCfg = Debug
+		{213A9B77-B67C-4E84-B98C-BAB6A1747AC6}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
