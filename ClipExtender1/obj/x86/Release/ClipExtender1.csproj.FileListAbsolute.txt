@@ -1,0 +1,9 @@
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender1.csprojResolveAssemblyReference.cache
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Release\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Release\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender.Form1.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender.Properties.Resources.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender1.csproj.GenerateResource.Cache
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Release\ClipExtender.About.resources
