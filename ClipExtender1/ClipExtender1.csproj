@@ -53,6 +53,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClipboardCommunication.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

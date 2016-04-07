@@ -17,3 +17,12 @@ C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender.About.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.csprojResolveAssemblyReference.cache
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.About.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.Form1.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.Properties.Resources.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.csproj.GenerateResource.Cache
