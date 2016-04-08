@@ -49,7 +49,7 @@ namespace ClipExtender
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.hasRunOnceTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,9 +88,9 @@ namespace ClipExtender
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // timer1
+            // hasRunOnceTimer
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.hasRunOnceTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // menuStrip1
             // 
@@ -130,6 +130,7 @@ namespace ClipExtender
             this.aboutClipExtenderToolStripMenuItem.Name = "aboutClipExtenderToolStripMenuItem";
             this.aboutClipExtenderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.aboutClipExtenderToolStripMenuItem.Text = "About ClipExtender";
+            this.aboutClipExtenderToolStripMenuItem.Click += new System.EventHandler(this.aboutClipExtenderToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -153,16 +154,15 @@ namespace ClipExtender
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuHelp;
         private System.Windows.Forms.ToolStripMenuItem aboutClipExtenderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        public System.Windows.Forms.Timer hasRunOnceTimer;
+        public System.Windows.Forms.ListBox listBox1;
     }
 }
 
