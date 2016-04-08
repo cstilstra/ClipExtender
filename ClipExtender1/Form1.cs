@@ -22,7 +22,7 @@ namespace ClipExtender
     {
 
         //used to determine if a clipboard change has already been acted upon
-        public Boolean messageHasBeenProcessed = false;
+        private Boolean messageHasBeenProcessed = false;
 
         //the path that the application executable is installed to
         String appPath = Application.StartupPath;
@@ -80,7 +80,7 @@ namespace ClipExtender
             //get the text from the newly selected item
             string toClipboard = listBox1.GetItemText(listBox1.SelectedItem);
             //indicate that the message has been processed
-            messageHasBeenProcessed = true;
+            setMessageHasBeenProcessed(true);
             //send it to the clipboard
             Clipboard.SetDataObject(toClipboard);
             //start the timer that will reset messageHasBeenProcessed to false
@@ -134,13 +134,23 @@ namespace ClipExtender
         
         private void timer1_Tick(object sender, EventArgs e)
         {
-            messageHasBeenProcessed = false;
+           setMessageHasBeenProcessed(false);
         }
         
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             //remove form as clipboard listener
             clipboardCommunication.endListeningToClipBoard(this.Handle);
+        }
+
+        public void setMessageHasBeenProcessed(bool value)
+        {
+            messageHasBeenProcessed = value;
+        }
+
+        public bool getMessageHasBeenProcessed()
+        {
+            return messageHasBeenProcessed;
         }
     }
 }

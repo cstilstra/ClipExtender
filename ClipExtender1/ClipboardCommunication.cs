@@ -57,7 +57,7 @@ namespace ClipExtender
             if (m.Msg == WM_CLIPBOARDUPDATE)
             {
                 //stops clipExtender from putting itself into an infinite loop every time something is copied
-                if (parentForm1.messageHasBeenProcessed == false)
+                if (parentForm1.getMessageHasBeenProcessed() == false)
                 {
                     //changes the clipboard contents, which resends the clipboard update message
                     //which reruns this subroutine, etc, looping forever without a toggle variable
@@ -96,7 +96,7 @@ namespace ClipExtender
             }
 
             //set runOnce to true so that the clipboard change message will not be acted upon again
-            parentForm1.messageHasBeenProcessed = true;
+            parentForm1.setMessageHasBeenProcessed(true);
             //select the last item in the list, which triggers sending of the clipboard change message
             parentForm1.selectLastItem();
             //start the timer that will reset messageHasBeenProcessed to false
