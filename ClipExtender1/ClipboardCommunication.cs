@@ -22,6 +22,7 @@ namespace ClipExtender
     class ClipboardCommunication
     {
         Form1 parentForm1;
+        DataBaseCommunications dbCommunications;
 
         //required for sub/unsub to the clipboard listener list
         [DllImport("user32.dll")]
@@ -35,6 +36,7 @@ namespace ClipExtender
         public ClipboardCommunication(Form1 form)
         {
             parentForm1 = form;
+            dbCommunications = new DataBaseCommunications();
         }
 
         public void beginListeningToClipboard(IntPtr windowHandle)
@@ -88,10 +90,11 @@ namespace ClipExtender
             //otherwise (if the clipboard does contain text)
             }
             else {
-                //if the string is not already in the listbox, add it
+                //if the string is not already in the listbox, add it to the listbox and database
                 if (!parentForm1.findStringInList(textFromClipboard))
                 {
                     parentForm1.listBox1.Items.Add(textFromClipboard);
+                    dbCommunications.addToCopiesTable(textFromClipboard);
                 }
             }
 
