@@ -55,6 +55,8 @@ namespace ClipExtender
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutClipExtenderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsNewListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +108,8 @@ namespace ClipExtender
             // menuFile
             // 
             this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listsToolStripMenuItem,
+            this.saveAsNewListToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(37, 20);
@@ -114,7 +118,7 @@ namespace ClipExtender
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // menuHelp
@@ -131,6 +135,19 @@ namespace ClipExtender
             this.aboutClipExtenderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.aboutClipExtenderToolStripMenuItem.Text = "About ClipExtender";
             this.aboutClipExtenderToolStripMenuItem.Click += new System.EventHandler(this.aboutClipExtenderToolStripMenuItem_Click);
+            // 
+            // listsToolStripMenuItem
+            // 
+            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
+            this.listsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.listsToolStripMenuItem.Text = "Open List";
+            this.listsToolStripMenuItem.Click += new System.EventHandler(this.listsToolStripMenuItem_Click);
+            // 
+            // saveAsNewListToolStripMenuItem
+            // 
+            this.saveAsNewListToolStripMenuItem.Name = "saveAsNewListToolStripMenuItem";
+            this.saveAsNewListToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveAsNewListToolStripMenuItem.Text = "Save As New List";
             // 
             // Form1
             // 
@@ -163,6 +180,8 @@ namespace ClipExtender
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         public System.Windows.Forms.Timer hasRunOnceTimer;
         public System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ToolStripMenuItem listsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsNewListToolStripMenuItem;
     }
 }
 

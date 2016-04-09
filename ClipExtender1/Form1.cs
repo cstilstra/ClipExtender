@@ -152,6 +152,14 @@ namespace ClipExtender
         {
             return messageHasBeenProcessed;
         }
+
+        private void listsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenListForm ListViewerFRM = new OpenListForm();
+            Form1 ParentForm = this;
+            ListViewerFRM.StartPosition = ParentForm.StartPosition;
+            ListViewerFRM.Show();
+        }
     }
 }
   
