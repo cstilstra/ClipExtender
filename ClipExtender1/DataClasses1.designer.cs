@@ -39,7 +39,7 @@ namespace ClipExtender
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::ClipExtender.Properties.Settings.Default.Database1ConnectionString, mappingSource)
+				base(global::ClipExtender.Properties.Settings.Default.Database1ConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -89,6 +89,14 @@ namespace ClipExtender
 			get
 			{
 				return this.GetTable<ListLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ClipboardLine> ClipboardLines
+		{
+			get
+			{
+				return this.GetTable<ClipboardLine>();
 			}
 		}
 	}
@@ -315,6 +323,33 @@ namespace ClipExtender
 					this._ListId = value;
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CopyId", DbType="Int NOT NULL")]
+		public int CopyId
+		{
+			get
+			{
+				return this._CopyId;
+			}
+			set
+			{
+				if ((this._CopyId != value))
+				{
+					this._CopyId = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ClipboardLines")]
+	public partial class ClipboardLine
+	{
+		
+		private int _CopyId;
+		
+		public ClipboardLine()
+		{
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CopyId", DbType="Int NOT NULL")]

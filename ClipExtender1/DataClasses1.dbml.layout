@@ -27,11 +27,24 @@
         <classShapeMoniker Id="e798bee1-ec58-4c1f-a1e5-ff1b5e6c0323" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.75 : 2.81899251302083); (7.75 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.75 : 2.81899251302083); (7.75 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClasses1DataContext/List/List_ListLine" />
       <nodes>
         <classShapeMoniker Id="b68bfe9c-87c7-4daa-93dd-542a94e7e4bf" />
         <classShapeMoniker Id="e798bee1-ec58-4c1f-a1e5-ff1b5e6c0323" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bf7d40df-5f3c-49c5-9c01-d42c82410f01" absoluteBounds="3.375, 3.5, 2, 1.0016910807291668">
+      <DataClassMoniker Name="/DataClasses1DataContext/ClipboardLine" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3a2a4a9a-1aff-4ed6-9f65-10c2766c9ab7" absoluteBounds="3.3899999999999997, 3.96, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 2.8862939453125); (5.125 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/Copy/Copy_ClipboardLine" />
+      <nodes>
+        <classShapeMoniker Id="19373ba5-cc46-4a4d-b16e-9d921cd97f3a" />
+        <classShapeMoniker Id="bf7d40df-5f3c-49c5-9c01-d42c82410f01" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

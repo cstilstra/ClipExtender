@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True" SettingsObjectName="ClipExtender.Properties.Settings" SettingsPropertyName="Database1ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="ClipExtender.Properties.Settings" SettingsPropertyName="Database1ConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Copies" Member="Copies">
     <Type Name="Copy">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="DateTime" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
       <Association Name="Copy_ListLine" Member="ListLines" ThisKey="Id" OtherKey="CopyId" Type="ListLine" />
+      <Association Name="Copy_ClipboardLine" Member="ClipboardLines" ThisKey="Id" OtherKey="CopyId" Type="ClipboardLine" />
     </Type>
   </Table>
   <Table Name="dbo.Lists" Member="Lists">
@@ -21,6 +22,12 @@
       <Column Name="CopyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Copy_ListLine" Member="Copy" ThisKey="CopyId" OtherKey="Id" Type="Copy" IsForeignKey="true" />
       <Association Name="List_ListLine" Member="List" ThisKey="ListId" OtherKey="Id" Type="List" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClipboardLines" Member="ClipboardLines">
+    <Type Name="ClipboardLine">
+      <Column Name="CopyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Copy_ClipboardLine" Member="Copy" ThisKey="CopyId" OtherKey="Id" Type="Copy" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
