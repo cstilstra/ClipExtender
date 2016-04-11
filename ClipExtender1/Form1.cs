@@ -103,7 +103,8 @@ namespace ClipExtender
         {
             int currentSelectionIndex = listBox1.SelectedIndex;
             listBox1.Items.Remove(listBox1.SelectedItem);
-            selectNextItemAfterDeletion(currentSelectionIndex);
+            extender.removeItemFromClipboard(currentSelectionIndex);
+            selectNextItemAfterDeletion(currentSelectionIndex);            
         }
 
         //selects the next item in the list after the just deleted item

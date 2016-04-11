@@ -45,5 +45,13 @@ namespace ClipExtender
             database.ExecuteCommand("TRUNCATE TABLE ClipboardLines");
         }
 
+        public void removeItemFromClipboard(int clipboardLineID)
+        {
+            ClipboardLine clipboardLine = database.ClipboardLines.Single(l => l.Id == clipboardLineID);
+            int copyID = clipboardLine.CopyId;
+            database.ExecuteCommand("DELETE FROM ClipboardLines WHERE Id=" + clipboardLineID);
+            database.ExecuteCommand("DELETE FROM Copies WHERE Id=" + copyID);
+        }
+
     }
 }

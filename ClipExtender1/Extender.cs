@@ -32,5 +32,11 @@ namespace ClipExtender
             dbCommunications.clearClipboard();
         }
 
+        public void removeItemFromClipboard(int listboxIndex)
+        {
+            int clipboardLineId = listboxIndex + 1;
+            dbCommunications.removeItemFromClipboard(clipboardLineId);
+        }
+
     }
 }
