@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ClipExtender
 {
-    class DataBaseCommunications
+    public class DataBaseCommunications
     {
         DataClasses1DataContext database;
 
