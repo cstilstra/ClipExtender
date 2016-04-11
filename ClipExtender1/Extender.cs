@@ -27,5 +27,10 @@ namespace ClipExtender
             return clipboardCommunication;
         }
 
+        public void clearClipboard()
+        {
+            dbCommunications.clearClipboard();
+        }
+
     }
 }

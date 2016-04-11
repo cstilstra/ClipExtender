@@ -94,6 +94,7 @@ namespace ClipExtender
         private void btnClear_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            extender.clearClipboard();
             Clipboard.Clear();
         }
 

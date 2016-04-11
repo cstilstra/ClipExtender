@@ -40,5 +40,10 @@ namespace ClipExtender
             database.SubmitChanges();
         }
 
+        public void clearClipboard()
+        {
+            database.ExecuteCommand("TRUNCATE TABLE ClipboardLines");
+        }
+
     }
 }
