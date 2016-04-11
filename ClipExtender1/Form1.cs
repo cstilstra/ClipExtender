@@ -21,12 +21,14 @@ namespace ClipExtender
     public partial class Form1 : Form
     {
 
+
         //used to determine if a clipboard change has already been acted upon
         private Boolean messageHasBeenProcessed = false;
 
         //the path that the application executable is installed to
         String appPath = Application.StartupPath;
 
+        Extender extender;
         ClipboardCommunication clipboardCommunication;
        
         public Form1()
@@ -39,7 +41,8 @@ namespace ClipExtender
         private void setUp()
         {
             selectLastItem();
-            clipboardCommunication = new ClipboardCommunication(this);
+            extender = new Extender(this);
+            clipboardCommunication = extender.getClipboardCommunication();
             clipboardCommunication.beginListeningToClipboard(this.Handle);
         }
 
@@ -91,6 +94,7 @@ namespace ClipExtender
         private void btnClear_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            extender.clearClipboard();
             Clipboard.Clear();
         }
 
@@ -99,7 +103,8 @@ namespace ClipExtender
         {
             int currentSelectionIndex = listBox1.SelectedIndex;
             listBox1.Items.Remove(listBox1.SelectedItem);
-            selectNextItemAfterDeletion(currentSelectionIndex);
+            extender.removeItemFromClipboard(currentSelectionIndex);
+            selectNextItemAfterDeletion(currentSelectionIndex);            
         }
 
         //selects the next item in the list after the just deleted item
@@ -159,6 +164,13 @@ namespace ClipExtender
             Form1 ParentForm = this;
             ListViewerFRM.StartPosition = ParentForm.StartPosition;
             ListViewerFRM.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'database1DataSet.ClipboardLines' table. You can move, or remove it, as needed.
+            this.clipboardLinesTableAdapter.Fill(this.database1DataSet.ClipboardLines);
+
         }
     }
 }

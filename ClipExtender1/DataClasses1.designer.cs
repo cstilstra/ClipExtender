@@ -36,10 +36,13 @@ namespace ClipExtender
     partial void InsertList(List instance);
     partial void UpdateList(List instance);
     partial void DeleteList(List instance);
+    partial void InsertClipboardLine(ClipboardLine instance);
+    partial void UpdateClipboardLine(ClipboardLine instance);
+    partial void DeleteClipboardLine(ClipboardLine instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::ClipExtender.Properties.Settings.Default.Database1ConnectionString1, mappingSource)
+				base(global::ClipExtender.Properties.Settings.Default.Database1ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -113,6 +116,8 @@ namespace ClipExtender
 		
 		private System.DateTime _DateTime;
 		
+		private EntitySet<ClipboardLine> _ClipboardLines;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -127,6 +132,7 @@ namespace ClipExtender
 		
 		public Copy()
 		{
+			this._ClipboardLines = new EntitySet<ClipboardLine>(new Action<ClipboardLine>(this.attach_ClipboardLines), new Action<ClipboardLine>(this.detach_ClipboardLines));
 			OnCreated();
 		}
 		
@@ -190,6 +196,19 @@ namespace ClipExtender
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Copy_ClipboardLine", Storage="_ClipboardLines", ThisKey="Id", OtherKey="CopyId")]
+		public EntitySet<ClipboardLine> ClipboardLines
+		{
+			get
+			{
+				return this._ClipboardLines;
+			}
+			set
+			{
+				this._ClipboardLines.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -208,6 +227,18 @@ namespace ClipExtender
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_ClipboardLines(ClipboardLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Copy = this;
+		}
+		
+		private void detach_ClipboardLines(ClipboardLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Copy = null;
 		}
 	}
 	
@@ -343,13 +374,31 @@ namespace ClipExtender
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ClipboardLines")]
-	public partial class ClipboardLine
+	public partial class ClipboardLine : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _CopyId;
 		
+		private int _Id;
+		
+		private EntityRef<Copy> _Copy;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCopyIdChanging(int value);
+    partial void OnCopyIdChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    #endregion
+		
 		public ClipboardLine()
 		{
+			this._Copy = default(EntityRef<Copy>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CopyId", DbType="Int NOT NULL")]
@@ -363,8 +412,90 @@ namespace ClipExtender
 			{
 				if ((this._CopyId != value))
 				{
+					if (this._Copy.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCopyIdChanging(value);
+					this.SendPropertyChanging();
 					this._CopyId = value;
+					this.SendPropertyChanged("CopyId");
+					this.OnCopyIdChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Copy_ClipboardLine", Storage="_Copy", ThisKey="CopyId", OtherKey="Id", IsForeignKey=true)]
+		public Copy Copy
+		{
+			get
+			{
+				return this._Copy.Entity;
+			}
+			set
+			{
+				Copy previousValue = this._Copy.Entity;
+				if (((previousValue != value) 
+							|| (this._Copy.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Copy.Entity = null;
+						previousValue.ClipboardLines.Remove(this);
+					}
+					this._Copy.Entity = value;
+					if ((value != null))
+					{
+						value.ClipboardLines.Add(this);
+						this._CopyId = value.Id;
+					}
+					else
+					{
+						this._CopyId = default(int);
+					}
+					this.SendPropertyChanged("Copy");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

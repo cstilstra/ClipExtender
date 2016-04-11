@@ -33,10 +33,10 @@ namespace ClipExtender
         //required to recognize clipboard update messages
         private static int WM_CLIPBOARDUPDATE = 0x031D;
 
-        public ClipboardCommunication(Form1 form)
+        public ClipboardCommunication(Form1 form, DataBaseCommunications incomingDBCommunications)
         {
             parentForm1 = form;
-            dbCommunications = new DataBaseCommunications();
+            dbCommunications = incomingDBCommunications;
         }
 
         public void beginListeningToClipboard(IntPtr windowHandle)
@@ -94,7 +94,7 @@ namespace ClipExtender
                 if (!parentForm1.findStringInList(textFromClipboard))
                 {
                     parentForm1.listBox1.Items.Add(textFromClipboard);
-                    dbCommunications.addToCopiesTable(textFromClipboard);
+                    dbCommunications.addCopy(textFromClipboard);
                 }
             }
 
