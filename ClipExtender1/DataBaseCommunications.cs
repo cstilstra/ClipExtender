@@ -53,5 +53,19 @@ namespace ClipExtender
             database.ExecuteCommand("DELETE FROM Copies WHERE Id=" + copyID);
         }
 
+        public void createNewList(string listName, List<string> copies)
+        {
+            int listEntryId = createNewListEntry(listName);
+        }
+
+        private int createNewListEntry(string listName)
+        {
+            List newList = new List();
+            newList.Name = listName;
+            database.Lists.InsertOnSubmit(newList);
+            database.SubmitChanges();
+            return newList.Id;
+        }
+
     }
 }

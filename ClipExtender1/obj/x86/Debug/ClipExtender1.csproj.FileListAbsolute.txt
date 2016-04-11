@@ -30,3 +30,4 @@ C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\Database1
 C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\Database1_log.ldf
 C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.exe.config
 C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.OpenListForm.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.NameNewList.resources

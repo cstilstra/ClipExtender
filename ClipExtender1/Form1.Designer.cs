@@ -132,6 +132,7 @@ namespace ClipExtender
             this.saveAsNewListToolStripMenuItem.Name = "saveAsNewListToolStripMenuItem";
             this.saveAsNewListToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.saveAsNewListToolStripMenuItem.Text = "Save As New List";
+            this.saveAsNewListToolStripMenuItem.Click += new System.EventHandler(this.saveAsNewListToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 

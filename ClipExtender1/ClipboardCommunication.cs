@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace ClipExtender
 {
-    class ClipboardCommunication
+    public class ClipboardCommunication
     {
         Form1 parentForm1;
         DataBaseCommunications dbCommunications;

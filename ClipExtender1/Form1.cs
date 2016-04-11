@@ -172,6 +172,14 @@ namespace ClipExtender
             this.clipboardLinesTableAdapter.Fill(this.database1DataSet.ClipboardLines);
 
         }
+
+        private void saveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NameNewList NameNewListFRM = new NameNewList();
+            NameNewListFRM.StartPosition = this.StartPosition;
+            NameNewListFRM.setExtender(extender);
+            NameNewListFRM.Show();
+        }
     }
 }
   

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClipExtender
 {
-    class Extender
+    public class Extender
     {
 
         Form1 parentForm;
@@ -16,11 +16,17 @@ namespace ClipExtender
 
         public Extender(Form1 callingForm)
         {
+            setUpReferences(callingForm);
+            clearClipboard();
+        }
+
+        private void setUpReferences(Form1 callingForm)
+        {
             parentForm = callingForm;
             dbCommunications = new DataBaseCommunications();
             clipboardCommunication = new ClipboardCommunication(parentForm, dbCommunications);
             currentClipboard = new List<Copy>();
-        } 
+        }
 
         public ClipboardCommunication getClipboardCommunication()
         {
@@ -38,5 +44,9 @@ namespace ClipExtender
             dbCommunications.removeItemFromClipboard(clipboardLineId);
         }
 
+        public void createNewList(string listName, List<string> copies)
+        {
+            dbCommunications.createNewList(listName, copies);
+        }
     }
 }
