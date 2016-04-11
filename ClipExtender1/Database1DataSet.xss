@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:Copies" ZOrder="7" X="334" Y="70" Height="134" Width="183" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:ListLines" ZOrder="6" X="70" Y="70" Height="115" Width="194" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:Lists" ZOrder="5" X="334" Y="274" Height="115" Width="170" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:ClipboardLines" ZOrder="2" X="568" Y="81" Height="96" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="46" />
+    <Shape ID="DesignTable:ClipboardLines" ZOrder="2" X="679" Y="133" Height="115" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_ListLines_ToCopyId" ZOrder="4" LineWidth="11">
@@ -44,11 +44,11 @@
       <RoutePoints>
         <Point>
           <X>517</X>
-          <Y>113</Y>
+          <Y>168</Y>
         </Point>
         <Point>
-          <X>568</X>
-          <Y>113</Y>
+          <X>679</X>
+          <Y>168</Y>
         </Point>
       </RoutePoints>
     </Connector>

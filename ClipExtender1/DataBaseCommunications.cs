@@ -15,18 +15,29 @@ namespace ClipExtender
             database = new DataClasses1DataContext();
         }
 
-        public void addToCopiesTable(String textToAdd)
+        public void addCopy(String textToAdd)
+        {
+            Copy copy = addNewCopy(textToAdd);
+            addNewClipboardLine(copy);
+
+        }
+
+        private Copy addNewCopy(String textToAdd)
         {
             Copy newCopy = new Copy();
             newCopy.Text = textToAdd;
             newCopy.DateTime = DateTime.Now;
             database.Copies.InsertOnSubmit(newCopy);
             database.SubmitChanges();
+            return newCopy;
+        }
 
-            Copy copy = database.Copies.Single(c => c.Text == textToAdd);
-            Debug.WriteLine("DataBaseCommunications: Id of just-added entry = " + copy.Id);
-            Debug.WriteLine("DataBaseCommunications: Datetime of just-added entry = " + copy.DateTime);
-
+        private void addNewClipboardLine(Copy copy)
+        {
+            ClipboardLine newClipboardLine = new ClipboardLine();
+            newClipboardLine.CopyId = copy.Id;
+            database.ClipboardLines.InsertOnSubmit(newClipboardLine);
+            database.SubmitChanges();
         }
 
     }

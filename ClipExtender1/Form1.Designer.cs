@@ -52,12 +52,17 @@ namespace ClipExtender
             this.hasRunOnceTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsNewListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutClipExtenderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsNewListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.database1DataSet = new ClipExtender.Database1DataSet();
+            this.clipboardLinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.clipboardLinesTableAdapter = new ClipExtender.Database1DataSetTableAdapters.ClipboardLinesTableAdapter();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clipboardLinesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -115,6 +120,19 @@ namespace ClipExtender
             this.menuFile.Size = new System.Drawing.Size(37, 20);
             this.menuFile.Text = "File";
             // 
+            // listsToolStripMenuItem
+            // 
+            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
+            this.listsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.listsToolStripMenuItem.Text = "Open List";
+            this.listsToolStripMenuItem.Click += new System.EventHandler(this.listsToolStripMenuItem_Click);
+            // 
+            // saveAsNewListToolStripMenuItem
+            // 
+            this.saveAsNewListToolStripMenuItem.Name = "saveAsNewListToolStripMenuItem";
+            this.saveAsNewListToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveAsNewListToolStripMenuItem.Text = "Save As New List";
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -136,18 +154,19 @@ namespace ClipExtender
             this.aboutClipExtenderToolStripMenuItem.Text = "About ClipExtender";
             this.aboutClipExtenderToolStripMenuItem.Click += new System.EventHandler(this.aboutClipExtenderToolStripMenuItem_Click);
             // 
-            // listsToolStripMenuItem
+            // database1DataSet
             // 
-            this.listsToolStripMenuItem.Name = "listsToolStripMenuItem";
-            this.listsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.listsToolStripMenuItem.Text = "Open List";
-            this.listsToolStripMenuItem.Click += new System.EventHandler(this.listsToolStripMenuItem_Click);
+            this.database1DataSet.DataSetName = "Database1DataSet";
+            this.database1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // saveAsNewListToolStripMenuItem
+            // clipboardLinesBindingSource
             // 
-            this.saveAsNewListToolStripMenuItem.Name = "saveAsNewListToolStripMenuItem";
-            this.saveAsNewListToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.saveAsNewListToolStripMenuItem.Text = "Save As New List";
+            this.clipboardLinesBindingSource.DataMember = "ClipboardLines";
+            this.clipboardLinesBindingSource.DataSource = this.database1DataSet;
+            // 
+            // clipboardLinesTableAdapter
+            // 
+            this.clipboardLinesTableAdapter.ClearBeforeFill = true;
             // 
             // Form1
             // 
@@ -163,8 +182,11 @@ namespace ClipExtender
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ClipExtender";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clipboardLinesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,6 +204,9 @@ namespace ClipExtender
         public System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripMenuItem listsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsNewListToolStripMenuItem;
+        private Database1DataSet database1DataSet;
+        private System.Windows.Forms.BindingSource clipboardLinesBindingSource;
+        private Database1DataSetTableAdapters.ClipboardLinesTableAdapter clipboardLinesTableAdapter;
     }
 }
 
