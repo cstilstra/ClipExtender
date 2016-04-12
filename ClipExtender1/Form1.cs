@@ -94,7 +94,7 @@ namespace ClipExtender
         //clears the listbox and clipboard
         private void btnClear_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            //listBox1.Items.Clear();
             extender.clearClipboard();
             Clipboard.Clear();
         }
@@ -161,7 +161,7 @@ namespace ClipExtender
 
         private void listsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenListForm ListViewerFRM = new OpenListForm();
+            OpenListForm ListViewerFRM = new OpenListForm(extender);
             Form1 ParentForm = this;
             ListViewerFRM.StartPosition = ParentForm.StartPosition;
             ListViewerFRM.Show();
@@ -182,15 +182,13 @@ namespace ClipExtender
             NameNewListFRM.Show();
         }
 
-        //public List<string> getListboxItems()
-        //{
-        //    List<string> itemsList = new List<string>();
-        //    foreach(string s in listBox1.Items)
-        //    {
-        //        itemsList.Add(s);
-        //    }
-        //    return itemsList;
-        //}
+        public void setListboxItems(List<string> items)
+        {
+            foreach (string item in items)
+            {
+                listBox1.Items.Add(item);
+            }
+        }
     }
 }
   

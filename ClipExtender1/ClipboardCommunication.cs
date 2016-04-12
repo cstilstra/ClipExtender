@@ -82,14 +82,8 @@ namespace ClipExtender
             String textFromClipboard = pullFromClipboard();
 
             //if the clipboard does not contain text
-            if (textFromClipboard == null)
+            if (textFromClipboard != null)
             {
-                //then show us a message box saying so
-                MessageBox.Show("The Clipboard does not contain text at this time.");
-
-            //otherwise (if the clipboard does contain text)
-            }
-            else {
                 //if the string is not already in the listbox, add it to the listbox and database
                 if (!parentForm1.findStringInList(textFromClipboard))
                 {

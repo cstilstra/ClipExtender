@@ -75,7 +75,7 @@ namespace ClipExtender
 
             foreach(int copyID in copyIds)
             {
-                Debug.WriteLine("DataBaseCommunications: " + copyID);
+                //Debug.WriteLine("DataBaseCommunications: " + copyID);
                 ListLine newListLine = new ListLine();
                 newListLine.ListId = listID;
                 newListLine.CopyId = copyID;
@@ -94,6 +94,33 @@ namespace ClipExtender
                 copyIds.Add(line.CopyId);
             }
             return copyIds;
+        }
+
+        public List<string> getCopyTextOnList(int listId)
+        {
+            List<string> copiesOnList = new List<string>();
+
+            List<int> copyIdsOnList = getCopyIdsOnList(listId);
+            foreach(int id in copyIdsOnList)
+            {
+                //get the copy from the database with a matching id
+                Copy copyFromList = database.Copies.Single(c => c.Id == id);
+                copiesOnList.Add(copyFromList.Text);
+            }
+            return copiesOnList;
+        }
+
+        private List<int> getCopyIdsOnList(int listId)
+        {
+            List<int> copyIdsOnList = new List<int>();
+            //get all of the list lines that match the list
+            var listLinesFromList = database.ListLines.Where(l => l.ListId == listId);
+            foreach(ListLine line in listLinesFromList)
+            {
+                copyIdsOnList.Add(line.CopyId);
+            }
+
+            return copyIdsOnList;
         }
     }
 }

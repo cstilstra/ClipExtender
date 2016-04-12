@@ -36,6 +36,7 @@ namespace ClipExtender
 
         public void clearClipboard()
         {
+            parentForm.listBox1.Items.Clear();
             dbCommunications.clearClipboard();
         }
 
@@ -47,18 +48,14 @@ namespace ClipExtender
 
         public void createNewList(string listName)
         {
-            //List<string> copyList = parentForm.getListboxItems();
             dbCommunications.createNewList(listName);
-            //testListboxItemRetrieval();
         }
 
-        //public void testListboxItemRetrieval()
-        //{
-        //    List<string> testList = parentForm.getListboxItems();
-        //    foreach(string s in testList)
-        //    {
-        //        Debug.WriteLine("Extender: " + s);
-        //    }
-        //}
+        public void openList(int listId)
+        {
+            clearClipboard();
+            List<string> copiesOnList = dbCommunications.getCopyTextOnList(listId);
+            parentForm.setListboxItems(copiesOnList);
+        }
     }
 }
