@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -44,9 +45,20 @@ namespace ClipExtender
             dbCommunications.removeItemFromClipboard(clipboardLineId);
         }
 
-        public void createNewList(string listName, List<string> copies)
+        public void createNewList(string listName)
         {
-            dbCommunications.createNewList(listName, copies);
+            //List<string> copyList = parentForm.getListboxItems();
+            dbCommunications.createNewList(listName);
+            //testListboxItemRetrieval();
         }
+
+        //public void testListboxItemRetrieval()
+        //{
+        //    List<string> testList = parentForm.getListboxItems();
+        //    foreach(string s in testList)
+        //    {
+        //        Debug.WriteLine("Extender: " + s);
+        //    }
+        //}
     }
 }

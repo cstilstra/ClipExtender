@@ -30,7 +30,7 @@ namespace ClipExtender
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            extender.createNewList(tbListName.Text, new List<string>());
+            extender.createNewList(tbListName.Text);
             this.Close();
         }
     }

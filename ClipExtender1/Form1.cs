@@ -14,6 +14,7 @@
 //along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ClipExtender
@@ -180,6 +181,16 @@ namespace ClipExtender
             NameNewListFRM.setExtender(extender);
             NameNewListFRM.Show();
         }
+
+        //public List<string> getListboxItems()
+        //{
+        //    List<string> itemsList = new List<string>();
+        //    foreach(string s in listBox1.Items)
+        //    {
+        //        itemsList.Add(s);
+        //    }
+        //    return itemsList;
+        //}
     }
 }
   
