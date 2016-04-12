@@ -5,8 +5,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="DateTime" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
-      <Association Name="Copy_ListLine" Member="ListLines" ThisKey="Id" OtherKey="CopyId" Type="ListLine" />
       <Association Name="Copy_ClipboardLine" Member="ClipboardLines" ThisKey="Id" OtherKey="CopyId" Type="ClipboardLine" />
+      <Association Name="Copy_ListLine" Member="ListLines" ThisKey="Id" OtherKey="CopyId" Type="ListLine" />
     </Type>
   </Table>
   <Table Name="dbo.Lists" Member="Lists">
@@ -16,19 +16,20 @@
       <Association Name="List_ListLine" Member="ListLines" ThisKey="Id" OtherKey="ListId" Type="ListLine" />
     </Type>
   </Table>
-  <Table Name="dbo.ListLines" Member="ListLines">
-    <Type Name="ListLine">
-      <Column Name="ListId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CopyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Copy_ListLine" Member="Copy" ThisKey="CopyId" OtherKey="Id" Type="Copy" IsForeignKey="true" />
-      <Association Name="List_ListLine" Member="List" ThisKey="ListId" OtherKey="Id" Type="List" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ClipboardLines" Member="ClipboardLines">
     <Type Name="ClipboardLine">
       <Column Name="CopyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="Copy_ClipboardLine" Member="Copy" ThisKey="CopyId" OtherKey="Id" Type="Copy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ListLines" Member="ListLines">
+    <Type Name="ListLine">
+      <Column Name="ListId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CopyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Copy_ListLine" Member="Copy" ThisKey="CopyId" OtherKey="Id" Type="Copy" IsForeignKey="true" />
+      <Association Name="List_ListLine" Member="List" ThisKey="ListId" OtherKey="Id" Type="List" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

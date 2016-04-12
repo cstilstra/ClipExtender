@@ -72,10 +72,17 @@ namespace ClipExtender
         private void createLinksToCurrentCopies(int listID)
         {
             List<int> copyIds = getCurrentCopyIds();
-            foreach(int id in copyIds)
+
+            foreach(int copyID in copyIds)
             {
-                Debug.WriteLine("DataBaseCommunications: " + id);
+                Debug.WriteLine("DataBaseCommunications: " + copyID);
+                ListLine newListLine = new ListLine();
+                newListLine.ListId = listID;
+                newListLine.CopyId = copyID;
+                database.ListLines.InsertOnSubmit(newListLine);
             }
+
+            database.SubmitChanges();
         }
 
         private List<int> getCurrentCopyIds()

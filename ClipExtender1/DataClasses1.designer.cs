@@ -39,6 +39,9 @@ namespace ClipExtender
     partial void InsertClipboardLine(ClipboardLine instance);
     partial void UpdateClipboardLine(ClipboardLine instance);
     partial void DeleteClipboardLine(ClipboardLine instance);
+    partial void InsertListLine(ListLine instance);
+    partial void UpdateListLine(ListLine instance);
+    partial void DeleteListLine(ListLine instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -87,19 +90,19 @@ namespace ClipExtender
 			}
 		}
 		
-		public System.Data.Linq.Table<ListLine> ListLines
-		{
-			get
-			{
-				return this.GetTable<ListLine>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ClipboardLine> ClipboardLines
 		{
 			get
 			{
 				return this.GetTable<ClipboardLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ListLine> ListLines
+		{
+			get
+			{
+				return this.GetTable<ListLine>();
 			}
 		}
 	}
@@ -118,6 +121,8 @@ namespace ClipExtender
 		
 		private EntitySet<ClipboardLine> _ClipboardLines;
 		
+		private EntitySet<ListLine> _ListLines;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -133,6 +138,7 @@ namespace ClipExtender
 		public Copy()
 		{
 			this._ClipboardLines = new EntitySet<ClipboardLine>(new Action<ClipboardLine>(this.attach_ClipboardLines), new Action<ClipboardLine>(this.detach_ClipboardLines));
+			this._ListLines = new EntitySet<ListLine>(new Action<ListLine>(this.attach_ListLines), new Action<ListLine>(this.detach_ListLines));
 			OnCreated();
 		}
 		
@@ -209,6 +215,19 @@ namespace ClipExtender
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Copy_ListLine", Storage="_ListLines", ThisKey="Id", OtherKey="CopyId")]
+		public EntitySet<ListLine> ListLines
+		{
+			get
+			{
+				return this._ListLines;
+			}
+			set
+			{
+				this._ListLines.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -240,6 +259,18 @@ namespace ClipExtender
 			this.SendPropertyChanging();
 			entity.Copy = null;
 		}
+		
+		private void attach_ListLines(ListLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Copy = this;
+		}
+		
+		private void detach_ListLines(ListLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Copy = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Lists")]
@@ -251,6 +282,8 @@ namespace ClipExtender
 		private int _Id;
 		
 		private string _Name;
+		
+		private EntitySet<ListLine> _ListLines;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -264,6 +297,7 @@ namespace ClipExtender
 		
 		public List()
 		{
+			this._ListLines = new EntitySet<ListLine>(new Action<ListLine>(this.attach_ListLines), new Action<ListLine>(this.detach_ListLines));
 			OnCreated();
 		}
 		
@@ -307,6 +341,19 @@ namespace ClipExtender
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="List_ListLine", Storage="_ListLines", ThisKey="Id", OtherKey="ListId")]
+		public EntitySet<ListLine> ListLines
+		{
+			get
+			{
+				return this._ListLines;
+			}
+			set
+			{
+				this._ListLines.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -326,50 +373,17 @@ namespace ClipExtender
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ListLines")]
-	public partial class ListLine
-	{
 		
-		private int _ListId;
-		
-		private int _CopyId;
-		
-		public ListLine()
+		private void attach_ListLines(ListLine entity)
 		{
+			this.SendPropertyChanging();
+			entity.List = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListId", DbType="Int NOT NULL")]
-		public int ListId
+		private void detach_ListLines(ListLine entity)
 		{
-			get
-			{
-				return this._ListId;
-			}
-			set
-			{
-				if ((this._ListId != value))
-				{
-					this._ListId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CopyId", DbType="Int NOT NULL")]
-		public int CopyId
-		{
-			get
-			{
-				return this._CopyId;
-			}
-			set
-			{
-				if ((this._CopyId != value))
-				{
-					this._CopyId = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.List = null;
 		}
 	}
 	
@@ -475,6 +489,198 @@ namespace ClipExtender
 						this._CopyId = default(int);
 					}
 					this.SendPropertyChanged("Copy");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ListLines")]
+	public partial class ListLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ListId;
+		
+		private int _CopyId;
+		
+		private int _Id;
+		
+		private EntityRef<Copy> _Copy;
+		
+		private EntityRef<List> _List;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnListIdChanging(int value);
+    partial void OnListIdChanged();
+    partial void OnCopyIdChanging(int value);
+    partial void OnCopyIdChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    #endregion
+		
+		public ListLine()
+		{
+			this._Copy = default(EntityRef<Copy>);
+			this._List = default(EntityRef<List>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListId", DbType="Int NOT NULL")]
+		public int ListId
+		{
+			get
+			{
+				return this._ListId;
+			}
+			set
+			{
+				if ((this._ListId != value))
+				{
+					if (this._List.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnListIdChanging(value);
+					this.SendPropertyChanging();
+					this._ListId = value;
+					this.SendPropertyChanged("ListId");
+					this.OnListIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CopyId", DbType="Int NOT NULL")]
+		public int CopyId
+		{
+			get
+			{
+				return this._CopyId;
+			}
+			set
+			{
+				if ((this._CopyId != value))
+				{
+					if (this._Copy.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCopyIdChanging(value);
+					this.SendPropertyChanging();
+					this._CopyId = value;
+					this.SendPropertyChanged("CopyId");
+					this.OnCopyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Copy_ListLine", Storage="_Copy", ThisKey="CopyId", OtherKey="Id", IsForeignKey=true)]
+		public Copy Copy
+		{
+			get
+			{
+				return this._Copy.Entity;
+			}
+			set
+			{
+				Copy previousValue = this._Copy.Entity;
+				if (((previousValue != value) 
+							|| (this._Copy.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Copy.Entity = null;
+						previousValue.ListLines.Remove(this);
+					}
+					this._Copy.Entity = value;
+					if ((value != null))
+					{
+						value.ListLines.Add(this);
+						this._CopyId = value.Id;
+					}
+					else
+					{
+						this._CopyId = default(int);
+					}
+					this.SendPropertyChanged("Copy");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="List_ListLine", Storage="_List", ThisKey="ListId", OtherKey="Id", IsForeignKey=true)]
+		public List List
+		{
+			get
+			{
+				return this._List.Entity;
+			}
+			set
+			{
+				List previousValue = this._List.Entity;
+				if (((previousValue != value) 
+							|| (this._List.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._List.Entity = null;
+						previousValue.ListLines.Remove(this);
+					}
+					this._List.Entity = value;
+					if ((value != null))
+					{
+						value.ListLines.Add(this);
+						this._ListId = value.Id;
+					}
+					else
+					{
+						this._ListId = default(int);
+					}
+					this.SendPropertyChanged("List");
 				}
 			}
 		}
