@@ -57,7 +57,6 @@ namespace ClipExtender
             ClipboardLine clipboardLine = database.ClipboardLines.Single(l => l.Id == clipboardLineID);
             int copyID = clipboardLine.CopyId;
             database.ExecuteCommand("DELETE FROM ClipboardLines WHERE Id=" + clipboardLineID);
-            database.ExecuteCommand("DELETE FROM Copies WHERE Id=" + copyID);
             refreshDatabaseConnection();
         }
 
@@ -127,6 +126,18 @@ namespace ClipExtender
             }
 
             return copyIdsOnList;
+        }
+
+        public void addListItemsToClipboard(int listId)
+        {
+            List<int> copyIdsOnList = getCopyIdsOnList(listId);
+            foreach (int id in copyIdsOnList)
+            {
+                ClipboardLine newLine = new ClipboardLine();
+                newLine.CopyId = id;
+                database.ClipboardLines.InsertOnSubmit(newLine);
+            }
+            database.SubmitChanges();
         }
     }
 }
