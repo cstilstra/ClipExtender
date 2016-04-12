@@ -87,7 +87,7 @@ namespace ClipExtender
                 //if the string is not already in the listbox, add it to the listbox and database
                 if (!parentForm1.findStringInList(textFromClipboard))
                 {
-                    parentForm1.listBox1.Items.Add(textFromClipboard);
+                    parentForm1.addItemToListbox(textFromClipboard);
                     dbCommunications.addCopy(textFromClipboard);
                 }
             }
@@ -97,7 +97,7 @@ namespace ClipExtender
             //select the last item in the list, which triggers sending of the clipboard change message
             parentForm1.selectLastItem();
             //start the timer that will reset messageHasBeenProcessed to false
-            parentForm1.hasRunOnceTimer.Start();
+            parentForm1.startHasRunOnceTimer();
         }
 
         //checks if the clipboard currently holds text, if so pulls that text and returns it as a string
@@ -111,7 +111,6 @@ namespace ClipExtender
                 //pull text 
                 clipboardText = Clipboard.GetText();
             }
-
             return clipboardText;
         }
     }

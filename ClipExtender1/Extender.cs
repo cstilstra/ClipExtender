@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ClipExtender
 {
@@ -10,10 +6,8 @@ namespace ClipExtender
     {
 
         Form1 parentForm;
-        DataBaseCommunications dbCommunications;
+        DataBaseCommunications databaseCommunications;
         ClipboardCommunication clipboardCommunication;
-
-        List<Copy> currentClipboard;
 
         public Extender(Form1 callingForm)
         {
@@ -24,9 +18,8 @@ namespace ClipExtender
         private void setUpReferences(Form1 callingForm)
         {
             parentForm = callingForm;
-            dbCommunications = new DataBaseCommunications();
-            clipboardCommunication = new ClipboardCommunication(parentForm, dbCommunications);
-            currentClipboard = new List<Copy>();
+            databaseCommunications = new DataBaseCommunications();
+            clipboardCommunication = new ClipboardCommunication(parentForm, databaseCommunications);
         }
 
         public ClipboardCommunication getClipboardCommunication()
@@ -36,25 +29,25 @@ namespace ClipExtender
 
         public void clearClipboard()
         {
-            parentForm.listBox1.Items.Clear();
-            dbCommunications.clearClipboard();
+            parentForm.clearListboxItems();
+            databaseCommunications.clearClipboard();
         }
 
         public void removeItemFromClipboard(int listboxIndex)
         {
             int clipboardLineId = listboxIndex + 1;
-            dbCommunications.removeItemFromClipboard(clipboardLineId);
+            databaseCommunications.removeItemFromClipboard(clipboardLineId);
         }
 
         public void createNewList(string listName)
         {
-            dbCommunications.createNewList(listName);
+            databaseCommunications.createNewList(listName);
         }
 
         public void openList(int listId)
         {
             clearClipboard();
-            List<string> copiesOnList = dbCommunications.getCopyTextOnList(listId);
+            List<string> copiesOnList = databaseCommunications.getCopyTextOnList(listId);
             parentForm.setListboxItems(copiesOnList);
         }
     }

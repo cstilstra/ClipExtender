@@ -17,8 +17,8 @@ namespace ClipExtender
 
         public void addCopy(String textToAdd)
         {
-            Copy copy = addNewCopy(textToAdd);
-            addNewClipboardLine(copy);
+            Copy line = addNewCopy(textToAdd);
+            addToClipboard(line);
 
         }
 
@@ -32,7 +32,7 @@ namespace ClipExtender
             return newCopy;
         }
 
-        private void addNewClipboardLine(Copy copy)
+        private void addToClipboard(Copy copy)
         {
             ClipboardLine newClipboardLine = new ClipboardLine();
             newClipboardLine.CopyId = copy.Id;
@@ -43,6 +43,12 @@ namespace ClipExtender
         public void clearClipboard()
         {
             database.ExecuteCommand("TRUNCATE TABLE ClipboardLines");
+            refreshDatabaseConnection();
+        }
+
+        private void refreshDatabaseConnection()
+        {
+            //reinitialize the database connection to clear out references
             database = new DataClasses1DataContext();
         }
 
@@ -52,6 +58,7 @@ namespace ClipExtender
             int copyID = clipboardLine.CopyId;
             database.ExecuteCommand("DELETE FROM ClipboardLines WHERE Id=" + clipboardLineID);
             database.ExecuteCommand("DELETE FROM Copies WHERE Id=" + copyID);
+            refreshDatabaseConnection();
         }
 
         public void createNewList(string listName)
@@ -75,7 +82,6 @@ namespace ClipExtender
 
             foreach(int copyID in copyIds)
             {
-                //Debug.WriteLine("DataBaseCommunications: " + copyID);
                 ListLine newListLine = new ListLine();
                 newListLine.ListId = listID;
                 newListLine.CopyId = copyID;

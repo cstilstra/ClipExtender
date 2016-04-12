@@ -189,6 +189,21 @@ namespace ClipExtender
                 listBox1.Items.Add(item);
             }
         }
+
+        public void addItemToListbox(string item)
+        {
+            listBox1.Items.Add(item);
+        }
+
+        public void clearListboxItems()
+        {
+            listBox1.Items.Clear();
+        }
+
+        public void startHasRunOnceTimer()
+        {
+            hasRunOnceTimer.Start();
+        }
     }
 }
   
