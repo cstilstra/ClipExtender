@@ -49,6 +49,7 @@ namespace ClipExtender
             clearClipboard();
             List<string> copiesOnList = databaseCommunications.getCopyTextOnList(listId);
             parentForm.setListboxItems(copiesOnList);
+            databaseCommunications.addListItemsToClipboard(listId);
         }
     }
 }
