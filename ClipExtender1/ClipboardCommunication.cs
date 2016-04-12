@@ -19,9 +19,10 @@ using System.Windows.Forms;
 
 namespace ClipExtender
 {
-    class ClipboardCommunication
+    public class ClipboardCommunication
     {
         Form1 parentForm1;
+        DataBaseCommunications dbCommunications;
 
         //required for sub/unsub to the clipboard listener list
         [DllImport("user32.dll")]
@@ -32,9 +33,10 @@ namespace ClipExtender
         //required to recognize clipboard update messages
         private static int WM_CLIPBOARDUPDATE = 0x031D;
 
-        public ClipboardCommunication(Form1 form)
+        public ClipboardCommunication(Form1 form, DataBaseCommunications incomingDBCommunications)
         {
             parentForm1 = form;
+            dbCommunications = incomingDBCommunications;
         }
 
         public void beginListeningToClipboard(IntPtr windowHandle)
@@ -80,18 +82,13 @@ namespace ClipExtender
             String textFromClipboard = pullFromClipboard();
 
             //if the clipboard does not contain text
-            if (textFromClipboard == null)
+            if (textFromClipboard != null)
             {
-                //then show us a message box saying so
-                MessageBox.Show("The Clipboard does not contain text at this time.");
-
-            //otherwise (if the clipboard does contain text)
-            }
-            else {
-                //if the string is not already in the listbox, add it
+                //if the string is not already in the listbox, add it to the listbox and database
                 if (!parentForm1.findStringInList(textFromClipboard))
                 {
-                    parentForm1.listBox1.Items.Add(textFromClipboard);
+                    parentForm1.addItemToListbox(textFromClipboard);
+                    dbCommunications.addCopy(textFromClipboard);
                 }
             }
 
@@ -100,7 +97,7 @@ namespace ClipExtender
             //select the last item in the list, which triggers sending of the clipboard change message
             parentForm1.selectLastItem();
             //start the timer that will reset messageHasBeenProcessed to false
-            parentForm1.hasRunOnceTimer.Start();
+            parentForm1.startHasRunOnceTimer();
         }
 
         //checks if the clipboard currently holds text, if so pulls that text and returns it as a string
@@ -114,7 +111,6 @@ namespace ClipExtender
                 //pull text 
                 clipboardText = Clipboard.GetText();
             }
-
             return clipboardText;
         }
     }

@@ -14,6 +14,7 @@
 //along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ClipExtender
@@ -21,12 +22,14 @@ namespace ClipExtender
     public partial class Form1 : Form
     {
 
+
         //used to determine if a clipboard change has already been acted upon
         private Boolean messageHasBeenProcessed = false;
 
         //the path that the application executable is installed to
         String appPath = Application.StartupPath;
 
+        Extender extender;
         ClipboardCommunication clipboardCommunication;
        
         public Form1()
@@ -39,7 +42,8 @@ namespace ClipExtender
         private void setUp()
         {
             selectLastItem();
-            clipboardCommunication = new ClipboardCommunication(this);
+            extender = new Extender(this);
+            clipboardCommunication = extender.getClipboardCommunication();
             clipboardCommunication.beginListeningToClipboard(this.Handle);
         }
 
@@ -90,7 +94,8 @@ namespace ClipExtender
         //clears the listbox and clipboard
         private void btnClear_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            //listBox1.Items.Clear();
+            extender.clearClipboard();
             Clipboard.Clear();
         }
 
@@ -99,7 +104,8 @@ namespace ClipExtender
         {
             int currentSelectionIndex = listBox1.SelectedIndex;
             listBox1.Items.Remove(listBox1.SelectedItem);
-            selectNextItemAfterDeletion(currentSelectionIndex);
+            extender.removeItemFromClipboard(currentSelectionIndex);
+            selectNextItemAfterDeletion(currentSelectionIndex);            
         }
 
         //selects the next item in the list after the just deleted item
@@ -151,6 +157,52 @@ namespace ClipExtender
         public bool getMessageHasBeenProcessed()
         {
             return messageHasBeenProcessed;
+        }
+
+        private void listsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenListForm ListViewerFRM = new OpenListForm(extender);
+            Form1 ParentForm = this;
+            ListViewerFRM.StartPosition = ParentForm.StartPosition;
+            ListViewerFRM.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'database1DataSet.ClipboardLines' table. You can move, or remove it, as needed.
+            this.clipboardLinesTableAdapter.Fill(this.database1DataSet.ClipboardLines);
+
+        }
+
+        private void saveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NameNewList NameNewListFRM = new NameNewList();
+            NameNewListFRM.StartPosition = this.StartPosition;
+            NameNewListFRM.setExtender(extender);
+            NameNewListFRM.Show();
+        }
+
+        public void setListboxItems(List<string> items)
+        {
+            foreach (string item in items)
+            {
+                listBox1.Items.Add(item);
+            }
+        }
+
+        public void addItemToListbox(string item)
+        {
+            listBox1.Items.Add(item);
+        }
+
+        public void clearListboxItems()
+        {
+            listBox1.Items.Clear();
+        }
+
+        public void startHasRunOnceTimer()
+        {
+            hasRunOnceTimer.Start();
         }
     }
 }
