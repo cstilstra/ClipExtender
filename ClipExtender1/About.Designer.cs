@@ -37,7 +37,7 @@
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.MaximumSize = new System.Drawing.Size(275, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(250, 78);
+            this.label1.Size = new System.Drawing.Size(247, 78);
             this.label1.TabIndex = 0;
             this.label1.Text = "An extension of the Windows clipboard allowing for multiple selections to be stor" +
     "ed simultaneously.\r\n\r\nLicensed under GNU GPLv3\r\n\r\nDeveloped by c.s.tilstra\r\n";
@@ -49,6 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 113);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "About";
             this.Text = "About";
             this.ResumeLayout(false);

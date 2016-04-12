@@ -70,9 +70,11 @@
             // 
             // btnOpenList
             // 
-            this.btnOpenList.Location = new System.Drawing.Point(38, 249);
+            this.btnOpenList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenList.Location = new System.Drawing.Point(12, 193);
             this.btnOpenList.Name = "btnOpenList";
-            this.btnOpenList.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenList.Size = new System.Drawing.Size(253, 23);
             this.btnOpenList.TabIndex = 4;
             this.btnOpenList.Text = "Open List";
             this.btnOpenList.UseVisualStyleBackColor = true;
@@ -80,12 +82,15 @@
             // 
             // listBox1
             // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.DataSource = this.listsBindingSource;
             this.listBox1.DisplayMember = "Name";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(12, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(232, 225);
+            this.listBox1.Size = new System.Drawing.Size(253, 160);
             this.listBox1.TabIndex = 5;
             // 
             // listsBindingSource1
@@ -95,9 +100,11 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(148, 249);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(12, 222);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(253, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -116,10 +123,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 284);
+            this.ClientSize = new System.Drawing.Size(277, 257);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnOpenList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "OpenListForm";
             this.Text = "Your Saved Lists";
             this.Load += new System.EventHandler(this.ListViewer_Load);
