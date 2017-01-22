@@ -35,20 +35,20 @@ namespace ClipExtender
         public Form1()
         {
             InitializeComponent();
-            setUp();
+            SetUp();
         }
 
         //sets up references and starting state
-        private void setUp()
+        private void SetUp()
         {
-            selectLastItem();
+            SelectLastItem();
             extender = new Extender(this);
             clipboardCommunication = extender.getClipboardCommunication();
             clipboardCommunication.beginListeningToClipboard(this.Handle);
         }
 
         //selects the last item in the list
-        public void selectLastItem()
+        public void SelectLastItem()
         {
             int numberOfItems = listBox1.Items.Count;
             int lastItemIndex = numberOfItems - 1;
@@ -69,7 +69,7 @@ namespace ClipExtender
         }        
 
         //determines if a string already exists as an item in the listbox
-        public bool findStringInList(string searchString)
+        public bool IsStringInList(string searchString)
         {
             int index = listBox1.FindStringExact(searchString);
             if (index == ListBox.NoMatches)
@@ -84,7 +84,7 @@ namespace ClipExtender
             //get the text from the newly selected item
             string toClipboard = listBox1.GetItemText(listBox1.SelectedItem);
             //indicate that the message has been processed
-            setMessageHasBeenProcessed(true);
+            SetMessageHasBeenProcessed(true);
             //send it to the clipboard
             Clipboard.SetDataObject(toClipboard);
             //start the timer that will reset messageHasBeenProcessed to false
@@ -105,11 +105,11 @@ namespace ClipExtender
             int currentSelectionIndex = listBox1.SelectedIndex;
             listBox1.Items.Remove(listBox1.SelectedItem);
             extender.removeItemFromClipboard(currentSelectionIndex);
-            selectNextItemAfterDeletion(currentSelectionIndex);            
+            SelectNextItemAfterDeletion(currentSelectionIndex);            
         }
 
         //selects the next item in the list after the just deleted item
-        private void selectNextItemAfterDeletion(int deletedIndex)
+        private void SelectNextItemAfterDeletion(int deletedIndex)
         {
             int numberOfItems = listBox1.Items.Count;
             if (numberOfItems > 0)
@@ -140,7 +140,7 @@ namespace ClipExtender
         
         private void timer1_Tick(object sender, EventArgs e)
         {
-           setMessageHasBeenProcessed(false);
+           SetMessageHasBeenProcessed(false);
         }
         
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -149,7 +149,7 @@ namespace ClipExtender
             clipboardCommunication.endListeningToClipBoard(this.Handle);
         }
 
-        public void setMessageHasBeenProcessed(bool value)
+        public void SetMessageHasBeenProcessed(bool value)
         {
             messageHasBeenProcessed = value;
         }
@@ -159,7 +159,7 @@ namespace ClipExtender
             return messageHasBeenProcessed;
         }
 
-        private void listsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ListsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenListForm ListViewerFRM = new OpenListForm(extender);
             Form1 ParentForm = this;
@@ -174,7 +174,7 @@ namespace ClipExtender
 
         }
 
-        private void saveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NameNewList NameNewListFRM = new NameNewList();
             NameNewListFRM.StartPosition = this.StartPosition;
@@ -182,7 +182,7 @@ namespace ClipExtender
             NameNewListFRM.Show();
         }
 
-        public void setListboxItems(List<string> items)
+        public void SetListboxItems(List<string> items)
         {
             foreach (string item in items)
             {
@@ -190,17 +190,27 @@ namespace ClipExtender
             }
         }
 
-        public void addItemToListbox(string item)
+        public void AddItemToListbox(string item)
         {
             listBox1.Items.Add(item);
+            SelectLastItem();
         }
 
-        public void clearListboxItems()
+        public void SelectItemInListbox(string item)
+        {
+            int index = listBox1.FindStringExact(item);
+            if(index != -1)
+            {
+                listBox1.SetSelected(index, true);
+            }
+        }
+
+        public void ClearListboxItems()
         {
             listBox1.Items.Clear();
         }
 
-        public void startHasRunOnceTimer()
+        public void StartHasRunOnceTimer()
         {
             hasRunOnceTimer.Start();
         }
