@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Linq;
-=======
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
 
 namespace ClipExtender
 {
@@ -52,11 +46,7 @@ namespace ClipExtender
 
         private void refreshDatabaseConnection()
         {
-<<<<<<< HEAD
             // reinitialize the database connection to clear out references
-=======
-            //reinitialize the database connection to clear out references
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
             database = new DataClasses1DataContext();
         }
 
@@ -116,11 +106,7 @@ namespace ClipExtender
             List<int> copyIdsOnList = getCopyIdsOnList(listId);
             foreach(int id in copyIdsOnList)
             {
-<<<<<<< HEAD
                 // get the copy from the database with a matching id
-=======
-                //get the copy from the database with a matching id
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
                 Copy copyFromList = database.Copies.Single(c => c.Id == id);
                 copiesOnList.Add(copyFromList.Text);
             }
@@ -130,11 +116,7 @@ namespace ClipExtender
         private List<int> getCopyIdsOnList(int listId)
         {
             List<int> copyIdsOnList = new List<int>();
-<<<<<<< HEAD
             // get all of the list lines that match the list
-=======
-            //get all of the list lines that match the list
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
             var listLinesFromList = database.ListLines.Where(l => l.ListId == listId);
             foreach(ListLine line in listLinesFromList)
             {

@@ -24,21 +24,13 @@ namespace ClipExtender
         Form1 parentForm1;
         DataBaseCommunications dbCommunications;
 
-<<<<<<< HEAD
         // required for sub/unsub to the clipboard listener list
-=======
-        //required for sub/unsub to the clipboard listener list
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
         [DllImport("user32.dll")]
         public static extern bool AddClipboardFormatListener(IntPtr hwnd);
         [DllImport("user32.dll")]
         public static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
 
-<<<<<<< HEAD
         // required to recognize clipboard update messages
-=======
-        //required to recognize clipboard update messages
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
         private static int WM_CLIPBOARDUPDATE = 0x031D;
 
         public ClipboardCommunication(Form1 form, DataBaseCommunications incomingDBCommunications)
@@ -49,11 +41,7 @@ namespace ClipExtender
 
         public void beginListeningToClipboard(IntPtr windowHandle)
         {
-<<<<<<< HEAD
             // if we cannot add the window as a format listener show a message box and abort
-=======
-            //if we cannot add the window as a format listener show a message box and abort
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
             if (!AddClipboardFormatListener(windowHandle))
             {
                 MessageBox.Show("Failed to add clipboard format listener, closing program.");
@@ -109,26 +97,15 @@ namespace ClipExtender
             }
         }
 
-<<<<<<< HEAD
         // checks if the clipboard currently holds text, if so pulls that text and returns it as a string
-=======
-        //checks if the clipboard currently holds text, if so pulls that text and returns it as a string
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
         private string pullFromClipboard()
         {
             String clipboardText = null;
             Boolean clipBoardContainsText = Clipboard.ContainsText();
-<<<<<<< HEAD
             // test if the clipboard containts text
             if (clipBoardContainsText == true)
             {
                 // pull text 
-=======
-            //test if the clipboard containts text
-            if (clipBoardContainsText == true)
-            {
-                //pull text 
->>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
                 clipboardText = Clipboard.GetText();
             }
             return clipboardText;
