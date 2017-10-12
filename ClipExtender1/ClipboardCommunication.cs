@@ -24,13 +24,13 @@ namespace ClipExtender
         Form1 parentForm1;
         DataBaseCommunications dbCommunications;
 
-        //required for sub/unsub to the clipboard listener list
+        // required for sub/unsub to the clipboard listener list
         [DllImport("user32.dll")]
         public static extern bool AddClipboardFormatListener(IntPtr hwnd);
         [DllImport("user32.dll")]
         public static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
 
-        //required to recognize clipboard update messages
+        // required to recognize clipboard update messages
         private static int WM_CLIPBOARDUPDATE = 0x031D;
 
         public ClipboardCommunication(Form1 form, DataBaseCommunications incomingDBCommunications)
@@ -41,7 +41,7 @@ namespace ClipExtender
 
         public void beginListeningToClipboard(IntPtr windowHandle)
         {
-            //if we cannot add the window as a format listener show a message box and abort
+            // if we cannot add the window as a format listener show a message box and abort
             if (!AddClipboardFormatListener(windowHandle))
             {
                 MessageBox.Show("Failed to add clipboard format listener, closing program.");
@@ -58,16 +58,16 @@ namespace ClipExtender
         {
             if (m.Msg == WM_CLIPBOARDUPDATE)
             {
-                //stops clipExtender from putting itself into an infinite loop every time something is copied
+                // stops clipExtender from putting itself into an infinite loop every time something is copied
                 if (parentForm1.getMessageHasBeenProcessed() == false)
                 {
-                    //changes the clipboard contents, which resends the clipboard update message
-                    //which reruns this subroutine, etc, looping forever without a toggle variable
+                    // changes the clipboard contents, which resends the clipboard update message
+                    // which reruns this subroutine, etc, looping forever without a toggle variable
                     getClipboardData();
                 }
-                //messageHasBeenProcessed will only ever be true within the first 100ms of having copied something
-                //because we are not able to react to the clipboard update message within this time
-                //it stops the program from continually looping
+                // messageHasBeenProcessed will only ever be true within the first 100ms of having copied something
+                // because we are not able to react to the clipboard update message within this time
+                // it stops the program from continually looping
                 return true;
             }
             else
@@ -76,39 +76,36 @@ namespace ClipExtender
             }
         }
 
-        //pulls the contents of the clipboard and adds to the listbox
+        // pulls the contents of the clipboard and adds to the listbox
         private void getClipboardData()
         {
             String textFromClipboard = pullFromClipboard();
 
-            //if the clipboard does not contain text
+            // if the clipboard contains text
             if (textFromClipboard != null)
             {
-                //if the string is not already in the listbox, add it to the listbox and database
-                if (!parentForm1.findStringInList(textFromClipboard))
+                // if the string is already in the listbox then go to that entry in the list
+                // if not, add it to the listbox and database
+                if (parentForm1.IsStringInList(textFromClipboard))
                 {
-                    parentForm1.addItemToListbox(textFromClipboard);
+                    parentForm1.SelectItemInListbox(textFromClipboard);
+                }else
+                {
+                    parentForm1.AddItemToListbox(textFromClipboard);
                     dbCommunications.addCopy(textFromClipboard);
                 }
             }
-
-            //set runOnce to true so that the clipboard change message will not be acted upon again
-            parentForm1.setMessageHasBeenProcessed(true);
-            //select the last item in the list, which triggers sending of the clipboard change message
-            parentForm1.selectLastItem();
-            //start the timer that will reset messageHasBeenProcessed to false
-            parentForm1.startHasRunOnceTimer();
         }
 
-        //checks if the clipboard currently holds text, if so pulls that text and returns it as a string
+        // checks if the clipboard currently holds text, if so pulls that text and returns it as a string
         private string pullFromClipboard()
         {
             String clipboardText = null;
             Boolean clipBoardContainsText = Clipboard.ContainsText();
-            //test if the clipboard containts text
+            // test if the clipboard containts text
             if (clipBoardContainsText == true)
             {
-                //pull text 
+                // pull text 
                 clipboardText = Clipboard.GetText();
             }
             return clipboardText;

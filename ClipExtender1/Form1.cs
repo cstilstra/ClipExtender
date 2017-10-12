@@ -22,11 +22,10 @@ namespace ClipExtender
     public partial class Form1 : Form
     {
 
-
-        //used to determine if a clipboard change has already been acted upon
+        // used to determine if a clipboard change has already been acted upon
         private Boolean messageHasBeenProcessed = false;
 
-        //the path that the application executable is installed to
+        // the path that the application executable is installed to
         String appPath = Application.StartupPath;
 
         Extender extender;
@@ -35,20 +34,20 @@ namespace ClipExtender
         public Form1()
         {
             InitializeComponent();
-            setUp();
+            SetUp();
         }
 
-        //sets up references and starting state
-        private void setUp()
+        // sets up references and starting state
+        private void SetUp()
         {
-            selectLastItem();
+            SelectLastItem();
             extender = new Extender(this);
             clipboardCommunication = extender.getClipboardCommunication();
             clipboardCommunication.beginListeningToClipboard(this.Handle);
         }
 
-        //selects the last item in the list
-        public void selectLastItem()
+        // selects the last item in the list
+        public void SelectLastItem()
         {
             int numberOfItems = listBox1.Items.Count;
             int lastItemIndex = numberOfItems - 1;
@@ -58,18 +57,18 @@ namespace ClipExtender
             }
         }
 
-        //handles the message that is sent when the clipboard updates
+        // handles the message that is sent when the clipboard updates
         protected override void DefWndProc(ref Message m)
         {
-            //if the clipboard extension doesn't need the messge
+            // if the clipboard extension doesn't need the messge
             if (!clipboardCommunication.handleUpdateMessage(m))
             {
                 base.DefWndProc(ref m);
             }            
         }        
 
-        //determines if a string already exists as an item in the listbox
-        public bool findStringInList(string searchString)
+        // determines if a string already exists as an item in the listbox
+        public bool IsStringInList(string searchString)
         {
             int index = listBox1.FindStringExact(searchString);
             if (index == ListBox.NoMatches)
@@ -78,46 +77,45 @@ namespace ClipExtender
                 return true;
         }
 
-        //handles the selection changing in the listbox
+        // handles the selection changing in the listbox
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //get the text from the newly selected item
+            // get the text from the newly selected item
             string toClipboard = listBox1.GetItemText(listBox1.SelectedItem);
-            //indicate that the message has been processed
-            setMessageHasBeenProcessed(true);
-            //send it to the clipboard
+            // indicate that the message has been processed
+            SetMessageHasBeenProcessed(true);
+            // send it to the clipboard
             Clipboard.SetDataObject(toClipboard);
-            //start the timer that will reset messageHasBeenProcessed to false
+            // start the timer that will reset messageHasBeenProcessed to false
             hasRunOnceTimer.Start();
         }
 
-        //clears the listbox and clipboard
+        // clears the listbox and clipboard
         private void btnClear_Click(object sender, EventArgs e)
         {
-            //listBox1.Items.Clear();
             extender.clearClipboard();
             Clipboard.Clear();
         }
 
-        //removes the current selection from the listbox and sets the seletion to the next item
+        // removes the current selection from the listbox and sets the seletion to the next item
         private void btnRemove_Click(object sender, EventArgs e)
         {
             int currentSelectionIndex = listBox1.SelectedIndex;
             listBox1.Items.Remove(listBox1.SelectedItem);
             extender.removeItemFromClipboard(currentSelectionIndex);
-            selectNextItemAfterDeletion(currentSelectionIndex);            
+            SelectNextItemAfterDeletion(currentSelectionIndex);            
         }
 
-        //selects the next item in the list after the just deleted item
-        private void selectNextItemAfterDeletion(int deletedIndex)
+        // selects the next item in the list after the just deleted item
+        private void SelectNextItemAfterDeletion(int deletedIndex)
         {
             int numberOfItems = listBox1.Items.Count;
             if (numberOfItems > 0)
             {
-                //if the deleted entry was the last in the list
+                // if the deleted entry was the last in the list
                 if (numberOfItems == deletedIndex)
                 {
-                    //decrement deletedIndex to select the new last item 
+                    // decrement deletedIndex to select the new last item 
                     deletedIndex--;
                 }
                 listBox1.SetSelected(deletedIndex, true);
@@ -132,24 +130,26 @@ namespace ClipExtender
             AboutFRM.Show();
         }
 
-        //exits the program
+        // exits the program
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
         
+        // handles the boolean that keeps the program out of an infinite loop
         private void timer1_Tick(object sender, EventArgs e)
         {
-           setMessageHasBeenProcessed(false);
+           SetMessageHasBeenProcessed(false);
         }
         
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //remove form as clipboard listener
+            // remove form as clipboard listener
             clipboardCommunication.endListeningToClipBoard(this.Handle);
         }
 
-        public void setMessageHasBeenProcessed(bool value)
+        // the messageHasBeenProcessed represents whether or not a new copy to the clipboard has been handled 
+        public void SetMessageHasBeenProcessed(bool value)
         {
             messageHasBeenProcessed = value;
         }
@@ -159,7 +159,8 @@ namespace ClipExtender
             return messageHasBeenProcessed;
         }
 
-        private void listsToolStripMenuItem_Click(object sender, EventArgs e)
+        // opens the window to open an existing saved list
+        private void ListsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenListForm ListViewerFRM = new OpenListForm(extender);
             Form1 ParentForm = this;
@@ -171,10 +172,10 @@ namespace ClipExtender
         {
             // TODO: This line of code loads data into the 'database1DataSet.ClipboardLines' table. You can move, or remove it, as needed.
             this.clipboardLinesTableAdapter.Fill(this.database1DataSet.ClipboardLines);
-
         }
 
-        private void saveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
+        // opens the window to name a new list
+        private void SaveAsNewListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NameNewList NameNewListFRM = new NameNewList();
             NameNewListFRM.StartPosition = this.StartPosition;
@@ -182,7 +183,7 @@ namespace ClipExtender
             NameNewListFRM.Show();
         }
 
-        public void setListboxItems(List<string> items)
+        public void SetListboxItems(List<string> items)
         {
             foreach (string item in items)
             {
@@ -190,17 +191,27 @@ namespace ClipExtender
             }
         }
 
-        public void addItemToListbox(string item)
+        public void AddItemToListbox(string item)
         {
             listBox1.Items.Add(item);
+            SelectLastItem();
         }
 
-        public void clearListboxItems()
+        public void SelectItemInListbox(string item)
+        {
+            int index = listBox1.FindStringExact(item);
+            if(index != -1)
+            {
+                listBox1.SetSelected(index, true);
+            }
+        }
+
+        public void ClearListboxItems()
         {
             listBox1.Items.Clear();
         }
 
-        public void startHasRunOnceTimer()
+        public void StartHasRunOnceTimer()
         {
             hasRunOnceTimer.Start();
         }

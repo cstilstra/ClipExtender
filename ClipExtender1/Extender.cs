@@ -29,7 +29,7 @@ namespace ClipExtender
 
         public void clearClipboard()
         {
-            parentForm.clearListboxItems();
+            parentForm.ClearListboxItems();
             databaseCommunications.clearClipboard();
         }
 
@@ -48,7 +48,7 @@ namespace ClipExtender
         {
             clearClipboard();
             List<string> copiesOnList = databaseCommunications.getCopyTextOnList(listId);
-            parentForm.setListboxItems(copiesOnList);
+            parentForm.SetListboxItems(copiesOnList);
             databaseCommunications.addListItemsToClipboard(listId);
         }
     }
