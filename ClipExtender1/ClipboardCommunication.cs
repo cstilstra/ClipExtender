@@ -24,13 +24,13 @@ namespace ClipExtender
         Form1 parentForm1;
         DataBaseCommunications dbCommunications;
 
-        //required for sub/unsub to the clipboard listener list
+        // required for sub/unsub to the clipboard listener list
         [DllImport("user32.dll")]
         public static extern bool AddClipboardFormatListener(IntPtr hwnd);
         [DllImport("user32.dll")]
         public static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
 
-        //required to recognize clipboard update messages
+        // required to recognize clipboard update messages
         private static int WM_CLIPBOARDUPDATE = 0x031D;
 
         public ClipboardCommunication(Form1 form, DataBaseCommunications incomingDBCommunications)
@@ -41,7 +41,7 @@ namespace ClipExtender
 
         public void beginListeningToClipboard(IntPtr windowHandle)
         {
-            //if we cannot add the window as a format listener show a message box and abort
+            // if we cannot add the window as a format listener show a message box and abort
             if (!AddClipboardFormatListener(windowHandle))
             {
                 MessageBox.Show("Failed to add clipboard format listener, closing program.");
@@ -97,15 +97,15 @@ namespace ClipExtender
             }
         }
 
-        //checks if the clipboard currently holds text, if so pulls that text and returns it as a string
+        // checks if the clipboard currently holds text, if so pulls that text and returns it as a string
         private string pullFromClipboard()
         {
             String clipboardText = null;
             Boolean clipBoardContainsText = Clipboard.ContainsText();
-            //test if the clipboard containts text
+            // test if the clipboard containts text
             if (clipBoardContainsText == true)
             {
-                //pull text 
+                // pull text 
                 clipboardText = Clipboard.GetText();
             }
             return clipboardText;

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace ClipExtender
 {
@@ -48,7 +46,7 @@ namespace ClipExtender
 
         private void refreshDatabaseConnection()
         {
-            //reinitialize the database connection to clear out references
+            // reinitialize the database connection to clear out references
             database = new DataClasses1DataContext();
         }
 
@@ -108,7 +106,7 @@ namespace ClipExtender
             List<int> copyIdsOnList = getCopyIdsOnList(listId);
             foreach(int id in copyIdsOnList)
             {
-                //get the copy from the database with a matching id
+                // get the copy from the database with a matching id
                 Copy copyFromList = database.Copies.Single(c => c.Id == id);
                 copiesOnList.Add(copyFromList.Text);
             }
@@ -118,7 +116,7 @@ namespace ClipExtender
         private List<int> getCopyIdsOnList(int listId)
         {
             List<int> copyIdsOnList = new List<int>();
-            //get all of the list lines that match the list
+            // get all of the list lines that match the list
             var listLinesFromList = database.ListLines.Where(l => l.ListId == listId);
             foreach(ListLine line in listLinesFromList)
             {
