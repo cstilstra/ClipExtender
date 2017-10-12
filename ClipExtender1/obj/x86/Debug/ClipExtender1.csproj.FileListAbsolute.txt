@@ -17,6 +17,23 @@ C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Beelzebub\Desktop\ClipExtenderWorking\trunk\ClipExtender1\obj\x86\Debug\ClipExtender.About.resources
+<<<<<<< HEAD
 C:\Users\Tilstra\documents\github\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.Form1.resources
 C:\Users\Tilstra\documents\github\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.OpenListForm.resources
 C:\Users\Tilstra\documents\github\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.csproj.GenerateResource.Cache
+=======
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.exe
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.pdb
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.csprojResolveAssemblyReference.cache
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.About.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.Form1.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.Properties.Resources.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender1.csproj.GenerateResource.Cache
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\Database1.mdf
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\Database1_log.ldf
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\bin\Debug\ClipExtender1.exe.config
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.OpenListForm.resources
+C:\Users\Tilstra\Documents\GitHub\ClipExtender\ClipExtender1\obj\x86\Debug\ClipExtender.NameNewList.resources
+>>>>>>> f32573743ed93f761f4c1aabaeb61d1b5b769085
