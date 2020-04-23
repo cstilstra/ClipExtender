@@ -26,16 +26,31 @@ namespace ClipExtender
         IStorageCommunications _storageComms;
         ClipboardCommunication _clipboardComms;
 
+        IntPtr _viewHandle;
+
         #endregion
 
-        #region Constructors
+        #region Constructors/Destructors
 
         public Extender(IStorageCommunications storage, IntPtr viewHandle)
         {
+            _viewHandle = viewHandle;
             SetUpReferences(storage);
             ClearClipboard();
-            _clipboardComms.BeginListeningToClipboard(viewHandle);
+            _clipboardComms.BeginListeningToClipboard(_viewHandle);
+            LastSeenText = "";
         }
+
+        ~Extender()
+        {
+            _clipboardComms.EndListeningToClipBoard(_viewHandle);
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string LastSeenText { get; private set; }
 
         #endregion
 
@@ -56,6 +71,7 @@ namespace ClipExtender
             string text = "";
             if (_clipboardComms.HandleUpdateMessage(message, ref text))
             {
+                LastSeenText = text;
                 if (!_storageComms.Contains(text))
                 {
                     _storageComms.AddCopy(text);

@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
 
+using ClipExtender.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -115,7 +116,7 @@ namespace ClipExtender.ViewModels
             }
         }
 
-        private void OnTimerTick(Object sender, ElapsedEventArgs e)
+        private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
             handledMessage = false;
         }
@@ -143,7 +144,16 @@ namespace ClipExtender.ViewModels
             if (items != null)
             {
                 CopiedItems = new ObservableCollection<string>(items);
-                SelectedItem = CopiedItems.LastOrDefault();
+                string lastSeenText = _extender.LastSeenText;
+                int indexOf = CopiedItems.IndexOf(lastSeenText);
+                if(indexOf >=0 && indexOf < CopiedItems.Count)
+                {
+                    SelectedItem = CopiedItems[indexOf];
+                }
+                else
+                {
+                    SelectedItem = CopiedItems.LastOrDefault();
+                }
             }
         }
 
