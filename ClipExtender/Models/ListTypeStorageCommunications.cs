@@ -1,144 +1,71 @@
-﻿using ClipExtender.Models;
+﻿// This file is part of ClipExtender.
+
+// ClipExtender is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// ClipExtender is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
+
+using ClipExtender.Models;
 using System.Collections.Generic;
 
 namespace ClipExtender
 {
     public class ListTypeStorageCommunications : IStorageCommunications
     {
-        //DataClasses1DataContext database;
-        List<string> storage;
+        #region Fields
+
+        List<string> _storage;
+
+        #endregion
+
+        #region Constructors
 
         public ListTypeStorageCommunications()
         {
             ClearClipboard();
         }
 
+        #endregion
+
+        #region Public Functions
+
         public void AddCopy(string textToAdd)
         {
-            storage.Add(textToAdd);
+            _storage.Add(textToAdd);
 
         }
 
-        //private Copy addNewCopy(String textToAdd)
-        //{
-        //    Copy newCopy = new Copy();
-        //    newCopy.Text = textToAdd;
-        //    newCopy.DateTime = DateTime.Now;
-        //    database.Copies.InsertOnSubmit(newCopy);
-        //    database.SubmitChanges();
-        //    return newCopy;
-        //}
-
-        //private void addToClipboard(Copy copy)
-        //{
-        //    ClipboardLine newClipboardLine = new ClipboardLine();
-        //    newClipboardLine.CopyId = copy.Id;
-        //    database.ClipboardLines.InsertOnSubmit(newClipboardLine);
-        //    database.SubmitChanges();
-        //}
-
         public void ClearClipboard()
         {
-            storage = new List<string>();
+            _storage = new List<string>();
+        }
+
+        public bool Contains(string item)
+        {
+            return _storage.Contains(item);
         }
 
         public IEnumerable<string> GetStorageItems()
         {
-            return storage;
+            return _storage;
         }
 
-        //private void refreshDatabaseConnection()
-        //{
-        //    // reinitialize the database connection to clear out references
-        //    database = new DataClasses1DataContext();
-        //}
-
-        public void RemoveItemFromClipboard(int clipboardLineID)
+        public void RemoveItemFromClipboard(string item)
         {
-            //ClipboardLine clipboardLine = database.ClipboardLines.Single(l => l.Id == clipboardLineID);
-            //int copyID = clipboardLine.CopyId;
-            //database.ExecuteCommand("DELETE FROM ClipboardLines WHERE Id=" + clipboardLineID);
-            //refreshDatabaseConnection();
+            if (Contains(item))
+            {
+                _storage.Remove(item);
+            }
         }
 
-        //public void createNewList(string listName)
-        //{
-        //    int listEntryId = createNewListEntry(listName);
-        //    createLinksToCurrentCopies(listEntryId);
-        //}
-
-        //private int createNewListEntry(string listName)
-        //{
-        //    List newList = new List();
-        //    newList.Name = listName;
-        //    database.Lists.InsertOnSubmit(newList);
-        //    database.SubmitChanges();
-        //    return newList.Id;
-        //}
-
-        //private void createLinksToCurrentCopies(int listID)
-        //{
-        //    List<int> copyIds = getCurrentCopyIds();
-
-        //    foreach(int copyID in copyIds)
-        //    {
-        //        ListLine newListLine = new ListLine();
-        //        newListLine.ListId = listID;
-        //        newListLine.CopyId = copyID;
-        //        database.ListLines.InsertOnSubmit(newListLine);
-        //    }
-
-        //    database.SubmitChanges();
-        //}
-
-        //private List<int> getCurrentCopyIds()
-        //{
-        //    List<int> copyIds = new List<int>();
-        //    var clipboardLines = database.ClipboardLines;
-        //    foreach(var line in clipboardLines)
-        //    {
-        //        copyIds.Add(line.CopyId);
-        //    }
-        //    return copyIds;
-        //}
-
-        //public List<string> getCopyTextOnList(int listId)
-        //{
-        //    List<string> copiesOnList = new List<string>();
-
-        //    List<int> copyIdsOnList = getCopyIdsOnList(listId);
-        //    foreach(int id in copyIdsOnList)
-        //    {
-        //        // get the copy from the database with a matching id
-        //        Copy copyFromList = database.Copies.Single(c => c.Id == id);
-        //        copiesOnList.Add(copyFromList.Text);
-        //    }
-        //    return copiesOnList;
-        //}
-
-        //private List<int> getCopyIdsOnList(int listId)
-        //{
-        //    List<int> copyIdsOnList = new List<int>();
-        //    // get all of the list lines that match the list
-        //    var listLinesFromList = database.ListLines.Where(l => l.ListId == listId);
-        //    foreach(ListLine line in listLinesFromList)
-        //    {
-        //        copyIdsOnList.Add(line.CopyId);
-        //    }
-
-        //    return copyIdsOnList;
-        //}
-
-        //public void addListItemsToClipboard(int listId)
-        //{
-        //    List<int> copyIdsOnList = getCopyIdsOnList(listId);
-        //    foreach (int id in copyIdsOnList)
-        //    {
-        //        ClipboardLine newLine = new ClipboardLine();
-        //        newLine.CopyId = id;
-        //        database.ClipboardLines.InsertOnSubmit(newLine);
-        //    }
-        //    database.SubmitChanges();
-        //}
+        #endregion
     }
 }

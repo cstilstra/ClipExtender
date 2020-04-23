@@ -1,67 +1,88 @@
-﻿using ClipExtender.Models;
+﻿// This file is part of ClipExtender.
+
+// ClipExtender is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// ClipExtender is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
+
+using ClipExtender.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace ClipExtender
 {
     public class Extender
     {
+        #region Fields
 
-        IStorageCommunications storageComms;
-        ClipboardCommunication clipboardComms;
+        IStorageCommunications _storageComms;
+        ClipboardCommunication _clipboardComms;
+
+        #endregion
+
+        #region Constructors
 
         public Extender(IStorageCommunications storage, IntPtr viewHandle)
         {
-            setUpReferences(storage);
+            SetUpReferences(storage);
             ClearClipboard();
-            clipboardComms.beginListeningToClipboard(viewHandle);
+            _clipboardComms.BeginListeningToClipboard(viewHandle);
         }
 
+        #endregion
 
-        public ClipboardCommunication GetClipboardCommunication()
-        {
-            return clipboardComms;
-        }
+        #region Public Functions
 
         public void ClearClipboard()
         {
-            //parentForm.ClearListboxItems();
-            storageComms.ClearClipboard();
+            _storageComms.ClearClipboard();
         }
 
-        public void RemoveItemFromClipboard(int listboxIndex)
+        public void RemoveItemFromClipboard(string item)
         {
-            int clipboardLineId = listboxIndex + 1;
-            storageComms.RemoveItemFromClipboard(clipboardLineId);
+            _storageComms.RemoveItemFromClipboard(item);
         }
 
-        public IEnumerable<string> HandleMessage(int message)
+        public bool HandleMessage(int message)
         {
-            if (clipboardComms.handleUpdateMessage(message))
+            string text = "";
+            if (_clipboardComms.HandleUpdateMessage(message, ref text))
             {
-                return storageComms.GetStorageItems();
+                if (!_storageComms.Contains(text))
+                {
+                    _storageComms.AddCopy(text);
+                }
+                return true;
             }
-            return null;
+            else
+            {
+                return false;
+            }
         }
 
-        //public void createNewList(string listName)
-        //{
-        //    databaseCommunications.createNewList(listName);
-        //}
-
-        //public void openList(int listId)
-        //{
-        //    clearClipboard();
-        //    List<string> copiesOnList = databaseCommunications.getCopyTextOnList(listId);
-        //    parentForm.SetListboxItems(copiesOnList);
-        //    databaseCommunications.addListItemsToClipboard(listId);
-        //}
-
-        private void setUpReferences(IStorageCommunications storage)
+        public IEnumerable<string> GetCopiedItems()
         {
-            storageComms = storage;
-            clipboardComms = new ClipboardCommunication(storageComms);
+            return _storageComms.GetStorageItems();
         }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void SetUpReferences(IStorageCommunications storage)
+        {
+            _storageComms = storage;
+            _clipboardComms = new ClipboardCommunication();
+        }
+
+        #endregion
     }
 }

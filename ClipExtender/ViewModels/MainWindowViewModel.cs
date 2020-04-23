@@ -1,11 +1,24 @@
-﻿using System;
+﻿// This file is part of ClipExtender.
+
+// ClipExtender is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// ClipExtender is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
+using System.Windows;
 
 namespace ClipExtender.ViewModels
 {
@@ -14,7 +27,8 @@ namespace ClipExtender.ViewModels
         #region Fields
 
         private Extender _extender;
-        private ClipboardCommunication _clipboardCommunication;
+        private Timer _timer;
+        private bool handledMessage = false;
 
         #endregion
 
@@ -25,6 +39,22 @@ namespace ClipExtender.ViewModels
         {
             get { return _CopiedItems; }
             set { SetProperty(ref _CopiedItems, value); }
+        }
+
+        private string _SelectedItem;
+        public string SelectedItem
+        {
+            get { return _SelectedItem; }
+            set 
+            {
+                if (value != null)
+                {
+                    handledMessage = true;
+                    Clipboard.SetDataObject(value);
+                    SetProperty(ref _SelectedItem, value);
+                    _timer.Start();
+                }
+            }
         }
 
         #region Commands
@@ -69,6 +99,8 @@ namespace ClipExtender.ViewModels
         {
             CopiedItems = new ObservableCollection<string>();
             _extender = new Extender(new ListTypeStorageCommunications(), viewHandle);
+            _timer = new Timer(100);
+            _timer.Elapsed += OnTimerTick;
         }
 
         #endregion
@@ -77,26 +109,42 @@ namespace ClipExtender.ViewModels
 
         public void HandleClipboardMessage(int message)
         {
-            IEnumerable<string> items = _extender.HandleMessage(message);
-
-            if(items != null)
+            if (!handledMessage)
             {
-                CopiedItems = new ObservableCollection<string>(items);
+                if (_extender.HandleMessage(message)) SetCopiedItemsFromStorage();            
             }
+        }
 
-            
+        private void OnTimerTick(Object sender, ElapsedEventArgs e)
+        {
+            handledMessage = false;
         }
 
         private void OnRemove()
         {
-            Console.WriteLine("OnRemove called");
-            CopiedItems.Add("NewItem");
-            RaisePropertyChanged("CopiedItems");
+            _extender.RemoveItemFromClipboard(SelectedItem);
+            SetCopiedItemsFromStorage();
         }
 
         private void OnClear()
         {
-            Console.WriteLine("OnClear called");
+            _extender.ClearClipboard();
+            CopiedItems = new ObservableCollection<string>();
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void SetCopiedItemsFromStorage()
+        {
+            IEnumerable<string> items = _extender.GetCopiedItems();
+
+            if (items != null)
+            {
+                CopiedItems = new ObservableCollection<string>(items);
+                SelectedItem = CopiedItems.LastOrDefault();
+            }
         }
 
         #endregion

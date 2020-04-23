@@ -64,6 +64,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extensions\ReflectionExtensionMethods.cs" />
+    <Compile Include="Models\DelegateCommand.cs" />
     <Compile Include="Models\IStorageCommunications.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

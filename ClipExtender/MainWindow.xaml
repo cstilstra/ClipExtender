@@ -22,6 +22,7 @@
             Grid.Row="0"
             Margin="5"
             ItemsSource="{Binding CopiedItems}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             />
 
         <Button

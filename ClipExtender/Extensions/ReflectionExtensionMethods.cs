@@ -13,16 +13,26 @@
 // You should have received a copy of the GNU General Public License
 // along with ClipExtender.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using System.Reflection;
 
-namespace ClipExtender.Models
+namespace System.Linq.Expressions
 {
-    public interface IStorageCommunications
+    internal static class ReflectionExtensionMethods
     {
-        void AddCopy(string textToAdd);
-        void ClearClipboard();
-        void RemoveItemFromClipboard(string item);
-        IEnumerable<string> GetStorageItems();
-        bool Contains(string item);
+        public static MemberInfo GetMemberInfo(this Expression expression)
+        {
+            MemberExpression operand;
+            LambdaExpression lambdaExpression = (LambdaExpression)expression;
+            if (lambdaExpression.Body as UnaryExpression != null)
+            {
+                UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
+                operand = (MemberExpression)body.Operand;
+            }
+            else
+            {
+                operand = (MemberExpression)lambdaExpression.Body;
+            }
+            return operand.Member;
+        }
     }
 }
