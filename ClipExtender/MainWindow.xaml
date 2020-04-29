@@ -1,0 +1,43 @@
+﻿<Window x:Class="ClipExtender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClipExtender"
+        xmlns:vms="clr-namespace:ClipExtender.ViewModels"
+        mc:Ignorable="d"
+        DataContext="vms:MainWindowViewModel"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox
+            Grid.Row="0"
+            Margin="5"
+            ItemsSource="{Binding CopiedItems}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            />
+
+        <Button
+            Grid.Row="1"
+            Margin="5"
+            Content="Remove from ClipExtender"
+            Command="{Binding RemoveCommand}"
+            />
+
+        <Button
+            Grid.Row="2"
+            Margin="5"
+            Content="Clear ClipExtender"
+            Command="{Binding ClearCommand}"
+            />
+
+    </Grid>
+</Window>
