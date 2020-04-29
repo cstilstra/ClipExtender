@@ -234,3 +234,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+ClipExtender1/bin/Debug/
+ClipExtender1/obj/x86/Debug/
